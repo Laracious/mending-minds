@@ -1,0 +1,50 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;700&display=swap");
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	font-family: "Titillium Web", sans-serif;
+}
+.blog{
+  background: linear-gradient(to right, #ff8080, #49de4b);
+}
+.blog-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 10px;
+}
+.blog-container img{
+  padding-top: 20px;
+  width: 30vh;
+  height: 30vh;
+}
+
+
+h2 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.blog-post {
+  margin-bottom: 10px;
+}
+
+h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.blog-metadata {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+.blog-content {
+  font-size: 16px;
+  line-height: 1.6;
+  font-size: 1.3rem;
+}

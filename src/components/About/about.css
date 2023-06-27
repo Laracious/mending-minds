@@ -1,0 +1,38 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;700&display=swap");
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	font-family: "Titillium Web", sans-serif;
+}
+.about-container{
+  padding-top: 5rem;
+  background-color: #49de4b;
+  background: linear-gradient(to left, #ff8080, #49de4b);
+}
+
+.heading .logo{
+	font-size: 2.5rem;
+	font-family: 'Times New Roman', Times, serif;
+	font-style: italic;
+}
+.about {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;  
+}
+
+
+.about h2 {
+  font-size: 4rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 1.5rem;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
