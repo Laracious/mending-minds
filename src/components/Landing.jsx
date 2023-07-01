@@ -5,10 +5,9 @@
 
 const Landing = () => {
   return (
-    <div className="body">
-      {/* <Navbar /> */}
-      <div className="main-body">
-        <div className="welcome">
+    <div className="landing-page">
+      <section className="landing">
+        <div className="landing-content">
           <h1>Welcome</h1>
           <p>
             to a safe space dedicated to nurturing your mental well-being and
@@ -19,15 +18,10 @@ const Landing = () => {
           </p>
           <a href="/About">Learn more</a>
         </div>
-        <div className="image-container">
-          <img
-            className="body-image"
-            src="../src/images/mental-health.jpg"
-            alt="depression"
-          />
+        <div className="landing-image">
+          <img src="./images/mental-health.jpg" alt="" />
         </div>
-      </div>
-
+      </section>
       <main>
         <div className="review">
           <p>Testimonials</p>
@@ -66,10 +60,10 @@ const Landing = () => {
         </div>
       </main>
       <footer>
-        <p>&copy; 2023 Mending Minds. All rights reserved.</p>
+        <p>&copy; 2023 Mending Mind. All rights reserved.</p>
       </footer>
     </div>
   );
-}
+};
 
-export default Landing
+export default Landing;
