@@ -2,7 +2,6 @@
 // import Navbar from './Navbar/Navbar'
 
 
-
 const Landing = () => {
   return (
     <div className="landing-page">
@@ -23,6 +22,7 @@ const Landing = () => {
         </div>
       </section>
       <main>
+     
         <div className="review">
           <p>Testimonials</p>
         </div>
