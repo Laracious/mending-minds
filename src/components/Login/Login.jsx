@@ -1,23 +1,30 @@
 import { useState } from 'react';
 import './login.css';
+import httpClient from "../httpClient";
+import { useNavigate } from 'react-router';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    // Perform login logic here
-    console.log('email:', email);
-    console.log('Password:', password);
   
-    setEmail('');
-    setPassword('');
+  const handleLogin = async () => {
+    console.log(email, password);
+    
+    console.log(email, password);
+
+    try{
+      const resp = await httpClient.post("//localhost:5000/login", {
+        email,
+        password,
+      });
+
+      window.location.href = "/";
+    } catch (e) {
+      if (error.resp.status === 401) {
+        alert("Invalid credentials");
+      }
+    }
   };
-
-  const a = "ball";
-  console.log(a)
-
   return (
     <div className='login-page'>
       <div className="login-container">
@@ -47,4 +54,3 @@ const Login = () => {
 };
 
 export default Login;
-
