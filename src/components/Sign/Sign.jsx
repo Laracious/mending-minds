@@ -1,53 +1,40 @@
 // import React from 'react'
-import { useState } from "react";
+import { useState} from "react";
 import "./sign.css";
 import { useNavigate } from "react-router";
-
+import axios from 'axios';
 // const [password, setPassword] = useState('');
 
 const Sign = () => {
-  const [formData, setFormData] = useState({
-    fname: "",
-    lname: "",
-    email: "",
-    password: "",
-    cpassword: "",
-  });
+  const [email, setEmail] = useState('');
+  const [fname, setFname] = useState('');
+  const [lname, setLname] = useState('');
+  const [password,setPassword] = useState('');
+  const [cpassword, setCpassword] = useState('');
 
-  const { fname, lname, email, password, cpassword } = formData;
 
-  // console.log(formData);
-
-  const handleSignUpChange = (e) => {
-    e.preventDefault();
-    const { name, value } = e.target;
-    // const name = e.target.name
-    // const value = e.target.value
-
-    setFormData({ ...formData, [name]: value });
-  };
   // console.log(formData);
   // console.log(formData);
 
-  const navigation = useNavigate();
+  let navigation = useNavigate();
 
-  const handleSignUp = (e) => {
-    e.preventDefault();
-    // Perform login logic here
+  function handleSignUp (){
+    axios.post('http://127.0.0.1:5000/Sign', {
+      email,
+      fname,
+      lname,
+      password,
+      cpassword
+    })
+    .then(function (response) {
+      console.log(response);
+      navigation("/Login");
+    })
+    .catch(function (error) {
+      console.log(error.data);
 
-    // console.log('email:', email);
-
-    setFormData({
-      fname: "",
-      lname: "",
-      email: "",
-      password: "",
-      cpassword: "",
     });
-
-    navigation("/Login");``
   };
-
   return (
     <div className="signUp-container">
       <div className="signUp">
@@ -57,39 +44,39 @@ const Sign = () => {
             type="text"
             name="fname"
             placeholder="First name"
-            value={fname.value}
-            onChange={handleSignUpChange}
+            value={fname}
+            onChange={(e) => setFname(e.target.value)}
           />
           <input
             type="text"
             name="lname"
             placeholder="Last name"
-            value={lname.value}
-            onChange={handleSignUpChange}
+            value={lname}
+            onChange={(e) => setLname(e.target.value)}
           />
           <input
             type="email"
             name="email"
             placeholder="Enter your email"
-            value={email.value}
-            onChange={handleSignUpChange}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <input
             type="password"
             name="password"
             // pattern="\b[a-zA-Z0-9._%@-]{6,}\b"
             placeholder="Password"
-            value={password.value}
-            onChange={handleSignUpChange}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <input
             type="password"
             name="cpassword"
             placeholder="Confirm password"
-            value={cpassword.value}
-            onChange={handleSignUpChange}
+            value={cpassword}
+            onChange={(e) => setCpassword(e.target.value)}
           />
-          <button type="submit" onClick={handleSignUp}>
+          <button type="button" onClick={handleSignUp}>
             Sign Up
           </button>
         </form>

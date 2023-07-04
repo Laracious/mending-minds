@@ -1,7 +1,4 @@
 
-// import Navbar from './Navbar/Navbar'
-
-
 const Landing = () => {
   return (
     <div className="landing-page">
