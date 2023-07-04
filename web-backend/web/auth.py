@@ -13,28 +13,25 @@ auth = Blueprint('auth', __name__)
 def Login():
     email = request.json['email']
     password = request.json['password']
-    #query db for credentials
-    user = User.query.filter_by(email=email).first()
-    if user:
-        if check_password_hash(user.password, password):
-            session['user_id'] = user.id
-            return jsonify({
-                "id":user.id,
-                "email":user.email,
-                "first_name": user.first_name,
-                "last_name":user.last_name
-            })
-            #return redirect(url_for('views.index'))
-        else:
-            return jsonify({
-                "error":"Wrong password"
-            }), 401
     
-    else:
-        return jsonify({
-            "error":"Account does not exist"
+    #query db for credentials
+    
+    user = User.query.filter_by(email=email).first()
+    
+    if user is None:
+        return jsonify ({
+                "error":"Un autorized"
         }), 401
-        #return redirect(url_for('auth.SignUP'))
+    
+    if not check_password_hash(user.password, password):
+        return jsonify({
+            "error":"Un auth"
+        }), 409
+    session["user_id"] = user.id
+    return jsonify({
+        "id": user.id,
+        "email": user.email
+    })
 
 @auth.route('/logout', methods=['GET', 'POST'])
 @login_required
@@ -45,8 +42,8 @@ def Logout():
 @auth.route('/Sign', methods=['GET', 'POST'])
 def SignUP():
     email =request.json['email']
-    firstName = request.json['first_name']
-    lastName = request.json['last_name']
+    firstName = request.json['fname']
+    lastName = request.json['lname']
     password = request.json['password']
     cpassword = request.json['cpassword']
     
@@ -72,13 +69,13 @@ def SignUP():
         'last_name':new_user.last_name,
     })
 
-#return curent login in user
+#return curent logged in in user
 @auth.route("/@me")
 def get_current_user():
     user_id = session.get('user_id')
     if not user_id:
         return jsonify({
-            'error':'User not login'
+            'error':'User not logged in'
         }), 401
     user = User.query.filter_by(id=user_id).first()
     return jsonify({

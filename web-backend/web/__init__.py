@@ -22,9 +22,9 @@ def create_app():
     #session variables
     app.config['SESSION_TYPE']="redis"
     app.config['SESSION_PERMANENT'] = False
-    app.config['ESSION_USE_SIGNER'] = True
+    app.config['SESSION_USE_SIGNER'] = True
     app.config['SESSION_REDIS'] = redis.from_url("redis://127.0.0.1:6379")
-    app.config['CORS_HEADERS'] = 'Content-Type'
+    app.config['SESSION_SIGNER'] = True
     
     server_session = Session(app)
     

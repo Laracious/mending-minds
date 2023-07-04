@@ -1,35 +1,33 @@
 import { useState } from 'react';
 import './login.css';
-import httpClient from "../httpClient";
+import axios from 'axios';
 import { useNavigate } from 'react-router';
 
-const Login = () => {
+let navigation = useNavigate();
+
+const Login = (e) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  
-  const handleLogin = async () => {
-    console.log(email, password);
-    
-    console.log(email, password);
-
-    try{
-      const resp = await httpClient.post("//localhost:5000/login", {
+   
+  function handleLogin() {
+    axios.post('http://127.0.0.1:5000/login', {
         email,
         password,
-      });
-
-      window.location.href = "/";
-    } catch (e) {
-      if (error.resp.status === 401) {
-        alert("Invalid credentials");
-      }
-    }
+    })
+    .then(function (response) {
+      console.log(response);
+      navigation("/");
+    })
+    .catch(function (error) {
+      console.log(error.data);
+      navigation("/Sign")
+    });
   };
   return (
     <div className='login-page'>
       <div className="login-container">
         <h2>Login</h2>
-        <form onSubmit={handleLogin}>
+        <form method="POST">
           <input
             type="email"
             name='email'
@@ -46,7 +44,7 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button type="submit"  >Login</button>
+          <button type="button" onClick={handleLogin} >Login</button>
         </form>
       </div>
     </div>

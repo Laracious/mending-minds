@@ -1,9 +1,8 @@
 // import React from 'react'
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import "./sign.css";
 import { useNavigate } from "react-router";
-import httpClient from "../httpClient";
-
+import axios from 'axios';
 // const [password, setPassword] = useState('');
 
 const Sign = () => {
@@ -19,24 +18,23 @@ const Sign = () => {
 
   let navigation = useNavigate();
 
-  const handleSignUp = async() => {
-    try{
-      const resp = await httpClient.post('http://127.0.0.1:/5000/Sign', {
-      fname: fname,
-      lname: lname,
-      email: email,
-      password: password,
-      cpassword: cpassword
+  function handleSignUp (){
+    axios.post('http://127.0.0.1:5000/Sign', {
+      email,
+      fname,
+      lname,
+      password,
+      cpassword
+    })
+    .then(function (response) {
+      console.log(response);
+      navigation("/Login");
+    })
+    .catch(function (error) {
+      console.log(error.data);
+
     });
-    navigation("/Login");
-  } catch (error) {
-    if (error.resp.status === 401) {
-      alert("passwords do not match");
-    } else if (error.resp.status === 409) {
-      alert("user already exists");
-    }
-  }
-  }
+  };
   return (
     <div className="signUp-container">
       <div className="signUp">
@@ -46,21 +44,21 @@ const Sign = () => {
             type="text"
             name="fname"
             placeholder="First name"
-            value={fname.value}
+            value={fname}
             onChange={(e) => setFname(e.target.value)}
           />
           <input
             type="text"
             name="lname"
             placeholder="Last name"
-            value={lname.value}
+            value={lname}
             onChange={(e) => setLname(e.target.value)}
           />
           <input
             type="email"
             name="email"
             placeholder="Enter your email"
-            value={email.value}
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <input
@@ -68,17 +66,17 @@ const Sign = () => {
             name="password"
             // pattern="\b[a-zA-Z0-9._%@-]{6,}\b"
             placeholder="Password"
-            value={password.value}
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <input
             type="password"
             name="cpassword"
             placeholder="Confirm password"
-            value={cpassword.value}
+            value={cpassword}
             onChange={(e) => setCpassword(e.target.value)}
           />
-          <button type="submit" onClick={() => handleSignUp()}>
+          <button type="button" onClick={handleSignUp}>
             Sign Up
           </button>
         </form>
