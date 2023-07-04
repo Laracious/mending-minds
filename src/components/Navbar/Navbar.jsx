@@ -1,11 +1,12 @@
 import { useRef } from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaTimes } from "react-icons/fa"; // imported icons from react-icons
 import "./navbar.css";
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom"; // import the 'NavLink' component from the React Router library.
 
 function Navbar() {
   const navRef = useRef();
 
+  // ShowNavbar toggles the visibility of the navbar.c
   const showNavbar = () => {
     navRef.current.classList.toggle("responsive_nav");
   };

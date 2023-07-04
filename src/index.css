@@ -14,46 +14,43 @@
 	--secondaryColor: #EAE509;
 	--textColor: #000;
 }
-.main-body{
+.landing {
   width: 100vw;
-  height: 80vh;
-  background-color: var(--mainColor);
+  height: 70vh;
   display: flex;
-  /* justify-content: space-between; */
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 100px; 
 }
-
-.welcome{
-  width: 50vw;
-  height: 100vh;
-  padding: 4rem;
-  position: static;
-  
-}
-.welcome h1{
-  padding-top: 6rem;
-  font-size: 5rem;
-  font-style: none;
-}
-
-.welcome p,
-.welcome a{
-  font-size: 1.5em;
-  padding: 2rem 0;
-  
-}
-.image-container{
-  width: 50vw;
-  height: 80vh;
-}
-.body-image{
-  width: 100%;
+.landing-content {
+  width: 50%;
   height: 100%;
-  background-size: contain;
-  /* padding: 6rem;
-  margin-top: 6rem;
-   */
+ background-color: var(--mainColor);
+ padding: 40px;
+ padding-left: 50px;
+}
+.landing-image {
+  width: 50%;
+  height: 100%;
+  background-image: url(./images/mental-health.jpg);
+  max-width: 100%;
+  height: 100%;
+  background-position: center;
+  background-position: cover;
+ 
+}
+.landing h1 {
+  font-size: 60px;
+  margin-bottom: 20px;
 }
 
+.landing p {
+  font-size: 27px;
+  margin-bottom: 30px;
+}
+.landing a{
+  font-size: 25px
+}
 .review{
   display: flex;
   justify-content: center;
@@ -62,134 +59,211 @@
   font-size: 2rem;
   font-style: normal;
 }
+.review p{
+  font-size: 40px;
+}
 .review-container{
   width: 100vw;
   height: 40vh;
   display: flex;
   justify-content: space-between;
-  padding: 4rem;
+  padding: 0 4rem;
   text-align: center;
-  gap: 3rem;
+  gap: 3rem; 
 }
-
 .review-container img{
   width: 10vh;
   border-radius: 50px;
-  
 }
 .review-container p{
-  font-size: 1.5rem;
-  padding-bottom: 2rem; 
+  font-size: 20px;
+  padding-bottom: 2rem;  
 }
 h5{
   color: #4E944F;
   font-size: 1.5rem;
 }
 footer{
+  padding-left: 60px;
+  background-color: var(--mainColorLight);
+}
+footer p{
+  font-size: 15px;
+}
+
+@media only screen and (max-width: 1024px) {
+    .landing {
+      width: 100vw;
+      height: 100vh;
+      display: grid;
+      padding-top: 40px;  
+    }
+    .landing-content {
+      width: 100%;
+      height: 50vh;
+     background-color: var(--mainColor);
+     padding-left: 25px ;
+     margin-bottom: 5px;
+    }
+    .landing-image {
+      width: 100%;
+      height: 50vh;
+      background-image: url(./images/mental-health.jpg);
+     background-size: cover; 
+    }
+    .landing h1 {
+      font-size: 60px; 
+    }
+    .landing p {
+      font-size: 25px;
+      margin-bottom: 30px;
+    }
+    .landing a{
+      font-size: 20px;
+      color: var(--textColor);
+    }
+    .review{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding-top: 2rem;
+    font-size: 20px;
+    font-style: normal;
+}
+.review p{
+  font-size: 40px;
+  padding-top: 1rem;
+}
+.review-container{
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  justify-content: space-between;
+  padding: 0 4rem;
+  text-align: center;
+  gap: 2rem;
+}
+.emily{
+  width: 100%;
+  height: 30vh;
+}
+.thomas{
+  width: 100%;
+  height: 30vh; 
+}
+.jennie{
+  width: 100%;
+  height: 30vh;
+}
+.review-container img{
+  width: 10vh;
+  border-radius: 50px;
+}
+.review-container p{
+  font-size: 25px;
+  padding-bottom: 20px;  
+}
+h5{
+  color: #4E944F;
+  font-size: 30px;
+}
+footer{
+  padding-left: 60px;
+  background-color: var(--mainColorLight);
+  padding-top: 1rem;
+}
+footer p{
+  font-size: 15px;
+}
+}
+@media only screen and (max-width: 768px) {
+  
+  .landing {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    padding-top: 35px; 
+   
+  }
+  .landing-content {
+    width: 100%;
+    height: 60vh;
+   background-color: var(--mainColor);
+   
+   padding-left: 24px ;
+   margin-bottom: 5px;
+  }
+
+  .landing-image {
+    width: 100%;
+    height: 40vh;
+    background-image: url(./images/mental-health.jpg);
+    background-size: cover;
+  }
+  .landing h1 {
+    font-size: 40px;
+   
+  }
+  
+  .landing p {
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+  .review{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding-top: 2rem;
+    font-size: 20px;
+    font-style: normal;
+ 
+}
+.review p{
+  font-size: 40px;
+}
+.review-container{
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  justify-content: space-between;
+  padding: 0 2rem;
+  text-align: center;
+  gap: 1.2rem;
+  /* background-color: var(--mainColorLight); */
+}
+.emily{
+  width: 100%;
+  height: 30vh;
+  
+}
+.thomas{
+  width: 100%;
+  height: 30vh;
+ 
+}
+.jennie{
+  width: 100%;
+  height: 30vh;
+  
+}
+.review-container img{
+  width: 10vh;
+  border-radius: 50px;
+}
+.review-container p{
+  font-size: 14px;
+  padding-bottom: 5px;  
+}
+h5{
+  color: #4E944F;
+  font-size: 1.3rem;
+}
+footer{
+  padding-left: 20px;
   display: flex;
   justify-content: center;
 }
 footer p{
-  font-size: 10px;
-  
-  padding-top: 3rem;
+  font-size: 15px;
 }
-
-
-/* @media only screen and (max-width: 768px) {
-
-  
-} */
-
-@media only screen and (max-width: 1024px) {
-  .main-body{
-    width: 100vw;
-    height: 100vh;
-    /* display: block; */
-    /* position: static; */
-    
-    flex-direction: column;
-    justify-content: space-between
-  }
-  .welcome{
-    width: 100vw;
-    height: 100vh;
-    /* display: block; */
-  }
-
-  .welcome h1{
-    /* margin-top: 1rem; */
-    font-size: 3rem;
-  }
-  
-  .welcome p{
-    font-size: 1rem;
-
-  }
-  .welcome a{
-    font-size: 1.2rem;
-    /* margin-top: 1rem; */
-  }
-  .image-container {
-width: 100vw;
-height: auto;
-/* margin-top: 6rem; */
-/* align-self: flex-end; */
-  }
-  
-  /* .body-image{
-    width: 100vw;
-    height: 50%;
-    background-size: contain;
-    background-color: #fff;
-  } */
-  .welcome{
-    width: 100vw;
-    height: 50vh;
-    padding: 2rem;
-  }
- 
- 
-  .review-container{
-    width: 100vw;
-    height: 75vh;
-    display: grid;
-    /* margin: 2rem; */
-    text-align: center;
-    justify-content: center;
-    
-  }
-  .emily{
-    width: 100vw;
-    height: 20vh;
-  }
-  
-  .thomas{
-    width: 100vw;
-    height: 20vh;
-  }
-  .jennie{
-    width: 100vw;
-    height: 20vh;
-  }
-  .review-container p{
-    font-size: 1rem;
-    padding: 0 2rem 0 2rem;
-  }
-  h5{
-    color: #4E944F;
-    font-size: 1.5rem;
-  }
-  footer{
-    display: flex;
-justify-content: flex-start;
-padding-top: 3rem;
-padding-left: 2rem;
-
-    /* padding:  4rem; */
-  }
-  footer p{
-    font-size: 8px;
-  }
-  
 }
