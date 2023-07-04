@@ -1,5 +1,4 @@
 
-
 const Landing = () => {
   return (
     <div className="body">

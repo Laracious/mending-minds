@@ -3,12 +3,12 @@ import './login.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
 
-let navigation = useNavigate();
+
 
 const Login = (e) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-   
+  let navigation = useNavigate();
   function handleLogin() {
     axios.post('http://127.0.0.1:5000/login', {
         email,
