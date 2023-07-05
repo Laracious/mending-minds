@@ -11,6 +11,7 @@ const Sign = () => {
   const [lname, setLname] = useState('');
   const [password,setPassword] = useState('');
   const [cpassword, setCpassword] = useState('');
+  const [utype, setUtype] = useState('');
 
 
   // console.log(formData);
@@ -54,6 +55,10 @@ const Sign = () => {
             value={lname}
             onChange={(e) => setLname(e.target.value)}
           />
+          <select name="utype">
+            <option selected="selected" value="Genral user">General user</option>
+            <option value="Concilor">Concelor</option>
+        </select>
           <input
             type="email"
             name="email"
@@ -61,6 +66,7 @@ const Sign = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+          
           <input
             type="password"
             name="password"
