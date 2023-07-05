@@ -30,14 +30,14 @@ def Login():
     session["user_id"] = user.id
     return jsonify({
         "id": user.id,
-        "email": user.email
+        "email": user.email,
+        "utype":user.utype
     })
 
-@auth.route('/logout', methods=['GET', 'POST'])
-@login_required
+@auth.route('/logout', methods=['POST'])
 def Logout():
-    logout_user()
-    return redirect(url_for('auth.index'))
+    session.pop('user_id')
+    return "200"
 
 @auth.route('/Sign', methods=['GET', 'POST'])
 def SignUP():
@@ -46,6 +46,7 @@ def SignUP():
     lastName = request.json['lname']
     password = request.json['password']
     cpassword = request.json['cpassword']
+    utype = request.json['utype']
     
     user_exists = User.query.filter_by(email=email).first() is not None
 
@@ -59,7 +60,7 @@ def SignUP():
             "error":'Passwords do not match'
         }), 401
     hashed_ps = generate_password_hash(password)
-    new_user = User(email=email, password=hashed_ps, first_name=firstName, last_name=lastName)
+    new_user = User(email=email, password=hashed_ps, first_name=firstName, last_name=lastName, utype=utype)
     db.session.add(new_user)
     db.session.commit()
     return jsonify({
@@ -67,6 +68,7 @@ def SignUP():
         'email':new_user.email,
         'first_name':new_user.first_name,
         'last_name':new_user.last_name,
+        'utype':new_user.utype
     })
 
 #return curent logged in in user
