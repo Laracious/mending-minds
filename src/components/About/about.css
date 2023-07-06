@@ -8,6 +8,7 @@
 	font-family: "Titillium Web", sans-serif;
 }
 .about-container{
+  height: 100vh;
   padding-top: 5rem;
   background-color: #49de4b;
   background: linear-gradient(to left, #ff8080, #49de4b);

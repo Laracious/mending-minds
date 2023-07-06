@@ -44,7 +44,17 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	/* background-color: #000; */
+	/* background-color: #83BD75; */
+	background-image: url(./src/images/group.webp);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	
+}
+.signUp-container img{
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
 }
 
 .signUp {

@@ -7,44 +7,107 @@
 	box-sizing: border-box;
 	font-family: "Titillium Web", sans-serif;
 }
+
+@media only screen and (min-width: 768px) {
 .blog{
-  background: linear-gradient(to right, #ff8080, #49de4b);
+  display: flex;
+  width: 100vw;
+  height: auto;
+  padding: 40px;
+  padding-top: 70px;
+  align-items: center;
+  flex-direction: column;
+  background-image: url(./src/images/group.webp);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  /* background: linear-gradient(to right, #ff8080, #49de4b); */
+ 
 }
-.blog-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 10px;
+.blog-container{
+  padding: 30px;
+  
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  flex-direction: column;
+  /* border: 2px solid red; */
+  gap: 30px;
 }
-.blog-container img{
+
+
+.header{
   padding-top: 20px;
-  width: 30vh;
-  height: 30vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.header h2{
+  font-size: 50px;
+  color: #043406;
+}
+h3{
+  font-size: 50px;
+  color: #000500;
+}
+.blog-item{
+  background-color: #fff;
+  border: solid 2px #49de4b;
+  border-radius: 10px;
+  padding: 20px 60px;
+  
+}
+a{
+  font-size: 20px;
+  color: #0b800f;
+}
+p{
+  font-size: 20px;
+}
+.blog-item img{
+  background-size: contain;
 }
 
-
-h2 {
-  font-size: 3rem;
-  font-weight: bold;
-  margin-bottom: 10px;
+  
+ }
+ @media only screen and (min-width: 300px) {
+  .blog{
+    display: flex;
+    width: 100vw;
+    height: auto;
+    padding: 20px;
+    padding-top: 70px;
+    align-items: center;
+    flex-direction: column;
+    background-image: url(./src/images/group.webp);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .blog-container{
+  /* padding: 30px; */
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  flex-direction: column;
+  /* border: 2px solid red; */
+  gap: 30px;
+}
+.blog-item{
+  width: 90%;
+  background-color: #fff;
+  border: solid 1px #49de4b;
+  border-radius: 10px;
+  padding: 20px 40px;
+  
+}
+.blog-item img{
+  width: 80%;
+  background-size: cover;
 }
 
-.blog-post {
-  margin-bottom: 10px;
-}
-
-h3 {
-  font-size: 22px;
-  margin-bottom: 10px;
-}
-
-.blog-metadata {
-  font-size: 14px;
-  color: #777;
-  margin-bottom: 10px;
-}
-
-.blog-content {
-  font-size: 16px;
-  line-height: 1.6;
-  font-size: 1.3rem;
-}
+ }
