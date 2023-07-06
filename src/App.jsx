@@ -7,12 +7,14 @@ import Login from "./components/Login/Login";
 import Sign from "./components/Sign/Sign";
 import { Route, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar/Navbar';
+import Notfound from './components/404/Notfound';
 
 function App() {
   return (
     <React.Fragment>
     <Navbar />
       <Routes>
+        <Route path='/404' name='Notfound' element={<Notfound/>}/>
         <Route path="/" name="Landing" element={<Landing />} />
         <Route path="/Home" name="Home" element={<Home />} />
         <Route path="/About" name="About" element={<About />} />
