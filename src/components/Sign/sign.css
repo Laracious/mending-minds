@@ -14,29 +14,6 @@
 	--textColor: #000;
 }
 
-
-/* .signUp-page {
-  
-  width: 100vw; 
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-	background-color: var(--mainColor);
-}
-
-.signUp-container {
-	width: 40vh;
-  height: 30vh; 
-	margin-top: 150px;
-  max-width: 80%;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-	background-color: var(--mainColor);
-} */
-
 .signUp-container {
 	width: 100vw;
 	height: 100vh;
@@ -45,7 +22,7 @@
 	justify-content: center;
 	align-items: center;
 	/* background-color: #83BD75; */
-	background-image: url(./src/images/group.webp);
+	background-image: url(https://cdn.pixabay.com/photo/2019/07/03/15/41/park-4314817_1280.jpg);
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center;
@@ -63,7 +40,7 @@
 	min-width: 40%;
 	min-height: 40%; */
 	width: 40vh;
-  height: 45vh;
+  height: 50vh;
 	/* min-height: 40%; */
   /* max-width: 80%; */
   margin: auto;

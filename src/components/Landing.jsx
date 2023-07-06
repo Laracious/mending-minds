@@ -19,23 +19,15 @@ const Landing = () => {
         </div>
       </section>
       <main>
-     
         <div className="review">
           <p>Testimonials</p>
         </div>
         <div className="review-container">
-          <div className="emily">
-            <img src="./src/images/review/emily.jpg" alt="portait" />
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Laboriosam ullam distinctio pariatur sint obcaecati, dolor quidem
-              omnis voluptatum rem explicabo. Odit rem iste vel cum quod,
-              blanditiis autem nobis sunt!
-            </p>
-            <h5>Emily</h5>
-          </div>
           <div className="thomas">
-            <img src="./src/images/review/thomas.jpg" alt="portait" />
+            <img
+              src="https://cdn.pixabay.com/photo/2017/08/01/01/33/beanie-2562646_1280.jpg"
+              alt="portait"
+            />
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
               Laboriosam ullam distinctio pariatur sint obcaecati, dolor quidem
@@ -44,8 +36,24 @@ const Landing = () => {
             </p>
             <h5>Thomas</h5>
           </div>
+          <div className="emily">
+            <img
+              src="https://cdn.pixabay.com/photo/2018/05/06/03/39/woman-3377839_1280.jpg"
+              alt="portait"
+            />
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Laboriosam ullam distinctio pariatur sint obcaecati, dolor quidem
+              omnis voluptatum rem explicabo. Odit rem iste vel cum quod,
+              blanditiis autem nobis sunt!
+            </p>
+            <h5>Emily</h5>
+          </div>
           <div className="jennie">
-            <img src="./src/images/review/jennie.jpg" alt="portait" />
+            <img
+              src="https://cdn.pixabay.com/photo/2017/02/16/23/10/smile-2072907_1280.jpg"
+              alt="portait"
+            />
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
               Laboriosam ullam distinctio pariatur sint obcaecati, dolor quidem

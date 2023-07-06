@@ -19,7 +19,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url(./src/images/consulting.webp);
+  background-image: url(https://cdn.pixabay.com/photo/2016/10/14/08/24/consulting-1739639_1280.jpg);
   background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center;
@@ -28,7 +28,7 @@
 
 .login-container {
   width: 40vh;
-  height: 30vh;
+  height: 40vh;
   max-width: 80%;
   margin: auto;
   padding: 20px;

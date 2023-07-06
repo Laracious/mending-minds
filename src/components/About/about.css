@@ -8,7 +8,7 @@
 	font-family: "Titillium Web", sans-serif;
 }
 .about-container{
-  height: 100vh;
+  /* height: 100vh; */
   padding-top: 5rem;
   background-color: #49de4b;
   background: linear-gradient(to left, #ff8080, #49de4b);
@@ -32,7 +32,7 @@
   margin-bottom: 10px;
 }
 
-p {
+.about p {
   font-size: 1.5rem;
   line-height: 1.6;
   margin-bottom: 15px;

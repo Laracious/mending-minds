@@ -73,7 +73,10 @@
 }
 .review-container img{
   width: 10vh;
+  height: 10vh;
   border-radius: 50px;
+  background-position: center;
+  background-size: cover;
 }
 .review-container p{
   font-size: 20px;
@@ -157,7 +160,11 @@ footer p{
 }
 .review-container img{
   width: 10vh;
+  height: 10vh;
   border-radius: 50px;
+  background-position: center;
+  background-size: cover;
+
 }
 .review-container p{
   font-size: 25px;
