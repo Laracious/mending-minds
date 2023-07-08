@@ -79,8 +79,8 @@ def SignUP():
     db.session.add(new_user)
     db.session.commit()
     return jsonify({
-        'id': new_user.id,
         'email':new_user.email,
+        'id': new_user.id,
         'first_name':new_user.first_name,
         'last_name':new_user.last_name,
     })
