@@ -8,7 +8,6 @@ import Sign from "./components/Sign/Sign";
 import { Route, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar/Navbar';
 import Notfound from './components/404/Notfound';
-import User from './components/userpage/user';
 function App() {
   return (
     <React.Fragment>

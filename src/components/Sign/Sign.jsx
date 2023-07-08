@@ -55,7 +55,11 @@ const Sign = () => {
             value={lname}
             onChange={(e) => setLname(e.target.value)}
           />
-          <select name="utype">
+          <select 
+          name="utype"
+          type="text"
+          onChange={(e) => setUtype(e.target.value)}
+          >
             <option selected="selected" value="Genral user">General user</option>
             <option value="Concilor">Concelor</option>
         </select>

@@ -2,9 +2,9 @@
 from flask import Blueprint, request, jsonify, session
 from web.models import User, db
 #jwt sessions libs
-from flask_jwt_extended import create_access_token
+from flask_jwt_extended import create_access_token, create_refresh_token,set_access_cookies, set_refresh_cookies
 #from flask_jwt_extended import get_jwt_identity
-# flask_jwt_extended import jwt_required
+from flask_jwt_extended import jwt_required,jwt_r
 
 #secure password
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -30,7 +30,16 @@ def Login():
             "error":"Un auth"
         }), 409
     access_token = create_access_token(identity=email)
-    return jsonify(access_token=access_token)
+    refresh_token = create_refresh_token(identity=email)
+    resp=jsonify({
+        'Success': "logged-in"
+    })
+    set_access_cookies(resp, access_token)
+    set_refresh_cookies(resp,refresh_token)
+    return resp, 200
+
+@auth.route('/login/refresh', methods=['POST'])
+@jwt_ref
 
 @auth.route('/logout', methods=['POST'])
 def Logout():
