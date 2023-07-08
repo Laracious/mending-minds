@@ -2,9 +2,9 @@
 from flask import Blueprint, request, jsonify, session
 from web.models import User, db
 #jwt sessions libs
-from flask_jwt_extended import create_access_token, create_refresh_token,set_access_cookies, set_refresh_cookies
-#from flask_jwt_extended import get_jwt_identity
-from flask_jwt_extended import jwt_required,jwt_r
+from flask_jwt_extended import (
+    create_access_token
+) 
 
 #secure password
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -29,24 +29,33 @@ def Login():
         return jsonify({
             "error":"Un auth"
         }), 409
+    #create the tokens we will be sending back to the user
     access_token = create_access_token(identity=email)
-    refresh_token = create_refresh_token(identity=email)
+    #refresh_token = create_refresh_token(identity=User.id)
     resp=jsonify({
-        'Success': "logged-in"
+        'access_token': access_token 
     })
-    set_access_cookies(resp, access_token)
-    set_refresh_cookies(resp,refresh_token)
+    #set jwt cookies in response
+    #set_access_cookies(resp, access_token)
+    #set_refresh_cookies(resp,refresh_token)
     return resp, 200
 
-@auth.route('/login/refresh', methods=['POST'])
-@jwt_ref
+#@auth.route('/refresh', methods=['POST'])
+#def Refresh():
+    #create the new access token
+    
+ #   access_token  = create_access_token(identity=current_user)
+    # set jwt in response
+  #  rep = jsonify({
+    #    "login":True
+   #     })
+   # set_access_cookies(rep, access_token)
+    #return rep, 200
 
-@auth.route('/logout', methods=['POST'])
-def Logout():
-    session.pop('user_id')
-    return "200"
+######nset_jwt_cookies(resp)
+    #return resp, 200
 
-@auth.route('/Sign', methods=['GET', 'POST'])
+@auth.route('/sign-up', methods=['GET', 'POST'])
 def SignUP():
     email =request.json['email']
     firstName = request.json['fname']
@@ -78,21 +87,6 @@ def SignUP():
         'utype':new_user.utype
     })
 
-#return curent logged in in user
-@auth.route("/@me")
-def get_current_user():
-    user_id = session.get('user_id')
-    if not user_id:
-        return jsonify({
-            'error':'User not logged in'
-        }), 401
-    user = User.query.filter_by(id=user_id).first()
-    return jsonify({
-        'id': user.id,
-        'email':user.email,
-        'first_name':user.first_name,
-        'last_name':user.last_name,
-    })
-    
+
 
 

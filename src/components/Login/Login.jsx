@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './login.css';
 import { useNavigate } from 'react-router';
 
-const token = sessionStorage.getItem("token");
+const token = localStorage.getItem("token");
 
 const Login = (e) => {
   const [email, setEmail] = useState('');
@@ -25,7 +25,7 @@ const Login = (e) => {
     .then(response => {
       if (response.status == 200){
         navigation("/");
-        return response.json() 
+        return response.json()
       } else alert("there was an error");
     })
     .then(data => {
