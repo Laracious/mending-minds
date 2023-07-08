@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./login.css";
 import { useNavigate } from "react-router";
 
-const token = sessionStorage.getItem("token");
+const token = localStorage.getItem("token");
 
 const Login = ({ handleLogin }) => {
   const [email, setEmail] = useState("");
@@ -17,6 +17,7 @@ const Login = ({ handleLogin }) => {
       navigation("/Home");
       localStorage.setItem("Auth", "true");
     }
+<<<<<<< HEAD
 
 
     // const opts = {
@@ -47,6 +48,27 @@ const Login = ({ handleLogin }) => {
     //   navigation("/Sign");
     // });
   }
+=======
+    fetch('http://127.0.0.1:5000/login', opts)
+    .then(response => {
+      if (response.status == 200){
+        navigation("/");
+        return response.json()
+      } else alert("there was an error");
+    })
+    .then(data => {
+      console.log("this came from backend"+ data.access_token);
+      sessionStorage.setItem("token", data.access_token);
+      
+    })
+  
+    .catch(function (error) {
+      console.log("there was an error", error);
+      navigation("/Sign");
+    });
+    
+};
+>>>>>>> 1c204264821921cb6c666e317bc3b48ade0c45d6
   return (
     <div className="login-page">
       <div className="login-container">

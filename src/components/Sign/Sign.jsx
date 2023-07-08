@@ -11,7 +11,7 @@ const Sign = () => {
   const [lname, setLname] = useState('');
   const [password,setPassword] = useState('');
   const [cpassword, setCpassword] = useState('');
-  const [utype, setUtype] = useState('');
+ 
 
 
   // console.log(formData);
@@ -20,13 +20,22 @@ const Sign = () => {
   let navigation = useNavigate();
 
   function handleSignUp (){
-    axios.post('http://127.0.0.1:5000/Sign', {
-      email,
-      fname,
-      lname,
-      password,
-      cpassword
-    })
+    const opts = {
+      
+      method:"POST",
+      headers:{
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email:email,
+        password:password,
+        cpassword:cpassword,
+        lname:lname,
+        fname:fname,
+
+      })}
+    fetch('http://127.0.0.1:5000/Sign', opts
+    )
     .then(function (response) {
       console.log(response);
       navigation("/Login");
@@ -55,10 +64,13 @@ const Sign = () => {
             value={lname}
             onChange={(e) => setLname(e.target.value)}
           />
+<<<<<<< HEAD
           {/* <select name="utype">
             <option selected="selected" value="Genral user">General user</option>
             <option value="Concilor">Concelor</option>
         </select> */}
+=======
+>>>>>>> 1c204264821921cb6c666e317bc3b48ade0c45d6
           <input
             type="email"
             name="email"

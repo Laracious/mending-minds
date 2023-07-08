@@ -5,11 +5,17 @@ import About from "./components/About/About";
 import Blog from "./components/Blog/Blog";
 import Login from "./components/Login/Login";
 import Sign from "./components/Sign/Sign";
+<<<<<<< HEAD
 import Booking from "./components/Booking/Booking";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Notfound from "./components/404/Notfound";
 
+=======
+import { Route, Routes } from 'react-router-dom'
+import Navbar from './components/Navbar/Navbar';
+import Notfound from './components/404/Notfound';
+>>>>>>> 1c204264821921cb6c666e317bc3b48ade0c45d6
 function App() {
 // const [isAuthenticated, setIsAuthenticated ] = useState( false );
 
