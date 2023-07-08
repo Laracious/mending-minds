@@ -1,18 +1,20 @@
 #This the authentication bluebrint of our app
-from flask import Blueprint, render_template, request, jsonify, session
+from flask import Blueprint, request, jsonify, session
 from web.models import User, db
-# redirect user 
-from flask import redirect, url_for
+#jwt sessions libs
+from flask_jwt_extended import create_access_token
+#from flask_jwt_extended import get_jwt_identity
+# flask_jwt_extended import jwt_required
+
 #secure password
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import login_user, login_required, logout_user, current_user
 
 auth = Blueprint('auth', __name__)
 
-@auth.route('/login', methods=['GET', 'POST'])
+@auth.route('/login', methods=['POST'])
 def Login():
-    email = request.json['email']
-    password = request.json['password']
+    email = request.json.get('email', None)
+    password = request.json.get('password', None)
     
     #query db for credentials
     
@@ -27,12 +29,8 @@ def Login():
         return jsonify({
             "error":"Un auth"
         }), 409
-    session["user_id"] = user.id
-    return jsonify({
-        "id": user.id,
-        "email": user.email,
-        "utype":user.utype
-    })
+    access_token = create_access_token(identity=email)
+    return jsonify(access_token=access_token)
 
 @auth.route('/logout', methods=['POST'])
 def Logout():

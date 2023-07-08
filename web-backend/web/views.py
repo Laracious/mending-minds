@@ -1,7 +1,6 @@
 #This the vies bluebrint of our app
 from flask import Blueprint,session, request, jsonify
 from web.models import Appointment,db, Userstory
-from flask_login import login_required, current_user
 views = Blueprint('views', __name__)
 
    
