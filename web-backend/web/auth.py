@@ -1,18 +1,20 @@
 #This the authentication bluebrint of our app
-from flask import Blueprint, render_template, request, jsonify, session
+from flask import Blueprint, request, jsonify, session
 from web.models import User, db
-# redirect user 
-from flask import redirect, url_for
+#jwt sessions libs
+from flask_jwt_extended import (
+    create_access_token
+) 
+
 #secure password
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import login_user, login_required, logout_user, current_user
 
 auth = Blueprint('auth', __name__)
 
-@auth.route('/login', methods=['GET', 'POST'])
+@auth.route('/login', methods=['POST'])
 def Login():
-    email = request.json['email']
-    password = request.json['password']
+    email = request.json.get('email', None)
+    password = request.json.get('password', None)
     
     #query db for credentials
     
@@ -27,17 +29,31 @@ def Login():
         return jsonify({
             "error":"Un auth"
         }), 409
-    session["user_id"] = user.id
-    return jsonify({
-        "id": user.id,
-        "email": user.email,
-        "utype":user.utype
+    #create the tokens we will be sending back to the user
+    access_token = create_access_token(identity=email)
+    #refresh_token = create_refresh_token(identity=User.id)
+    resp=jsonify({
+        'access_token': access_token 
     })
+    #set jwt cookies in response
+    #set_access_cookies(resp, access_token)
+    #set_refresh_cookies(resp,refresh_token)
+    return resp, 200
 
-@auth.route('/logout', methods=['POST'])
-def Logout():
-    session.pop('user_id')
-    return "200"
+#@auth.route('/refresh', methods=['POST'])
+#def Refresh():
+    #create the new access token
+    
+ #   access_token  = create_access_token(identity=current_user)
+    # set jwt in response
+  #  rep = jsonify({
+    #    "login":True
+   #     })
+   # set_access_cookies(rep, access_token)
+    #return rep, 200
+
+######nset_jwt_cookies(resp)
+    #return resp, 200
 
 @auth.route('/Sign', methods=['GET', 'POST'])
 def SignUP():
@@ -46,7 +62,6 @@ def SignUP():
     lastName = request.json['lname']
     password = request.json['password']
     cpassword = request.json['cpassword']
-    utype = request.json['utype']
     
     user_exists = User.query.filter_by(email=email).first() is not None
 
@@ -60,32 +75,16 @@ def SignUP():
             "error":'Passwords do not match'
         }), 401
     hashed_ps = generate_password_hash(password)
-    new_user = User(email=email, password=hashed_ps, first_name=firstName, last_name=lastName, utype=utype)
+    new_user = User(email=email, password=hashed_ps, first_name=firstName, last_name=lastName)
     db.session.add(new_user)
     db.session.commit()
     return jsonify({
-        'id': new_user.id,
         'email':new_user.email,
+        'id': new_user.id,
         'first_name':new_user.first_name,
         'last_name':new_user.last_name,
-        'utype':new_user.utype
     })
 
-#return curent logged in in user
-@auth.route("/@me")
-def get_current_user():
-    user_id = session.get('user_id')
-    if not user_id:
-        return jsonify({
-            'error':'User not logged in'
-        }), 401
-    user = User.query.filter_by(id=user_id).first()
-    return jsonify({
-        'id': user.id,
-        'email':user.email,
-        'first_name':user.first_name,
-        'last_name':user.last_name,
-    })
-    
+
 
 

@@ -1,14 +1,18 @@
 #This the vies bluebrint of our app
-from flask import Blueprint,session, request, jsonify
-from web.models import Appointment,db, Userstory
-from flask_login import login_required, current_user
+from flask import Blueprint,request, jsonify
+
+from web.models import Appointment,db, Userstory, User
 views = Blueprint('views', __name__)
+from flask_jwt_extended import (
+    get_jwt_identity
+) 
 
    
 
-@views.route('/appointment', methods=['GET','POST'])
+@views.route('/',endpoint="appointment", methods=['GET','POST'])
+
 def make_appoitment():
-    user_id = session.get('user_id')
+    user_id = get_jwt_identity()
     if not user_id:
         return jsonify({
             'error': 'User not logged in'
@@ -35,10 +39,10 @@ def make_appoitment():
 
     })
 
-@views.route("/stories", methods=['GET', 'POST'])
+@views.route("/stories", endpoint="stories",methods=['GET', 'POST'])
+
 def make_stories():
-    
-    user_id = session.get('user_id')
+    user_id = get_jwt_identity()
     data = request.json['data']
     if not user_id:
         return jsonify({
@@ -59,3 +63,19 @@ def make_stories():
         "data": new_story.data,
         "user_id":new_story.user_id
     })
+#return curent logged in in user
+@views.route("/", endpoint="@me",methods=['GET'])
+def get_current_user():
+    user_id = get_jwt_identity()
+    if not user_id:
+        return jsonify({
+            'error':'User not logged in'
+        }), 401
+    user = User.query.filter_by(id=user_id).first()
+    return jsonify({
+        'id': user.id,
+        'email':user.email,
+        'first_name':user.first_name,
+        'last_name':user.last_name,
+    })
+    
