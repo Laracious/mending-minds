@@ -25,7 +25,10 @@
 	background-position: center;
 }
 
-
+#log {
+  font-size: 3rem;
+  color: #fff;
+}
 .login-container {
   width: 40vh;
   height: 40vh;
