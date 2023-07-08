@@ -12,7 +12,7 @@ class User(db.Model, UserMixin):
     id = db.Column(db.String(32), primary_key=True, unique=True, default=get_uuid)
     email = db.Column(db.String(345), nullable=False,unique=True)
     password  = db.Column(db.String(150), nullable=False)
-    utype = db.Column(db.String(150), nullable=False)
+    #utype = db.Column(db.String(150), nullable=False)
     first_name = db.Column(db.String(150), nullable=False)
     last_name = db.Column(db.String(150), nullable=False)
     stories = db.relationship('Userstory')
