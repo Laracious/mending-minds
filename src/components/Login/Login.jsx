@@ -1,33 +1,53 @@
 import { useState } from 'react';
 import './login.css';
-import axios from 'axios';
 import { useNavigate } from 'react-router';
 
-
+const token = sessionStorage.getItem("token");
 
 const Login = (e) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  
   let navigation = useNavigate();
+  
   function handleLogin() {
-    axios.post('http://127.0.0.1:5000/login', {
-        email,
-        password,
+    const opts = {
+      method:"POST",
+      headers:{
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email:email,
+        password:password
+      })
+    }
+    fetch('http://127.0.0.1:5000/login', opts)
+    .then(response => {
+      if (response.status == 200){
+        navigation("/");
+        return response.json() 
+      } else alert("there was an error");
     })
-    .then(function (response) {
-      console.log(response);
-      navigation("/");
+    .then(data => {
+      console.log("this came from backend"+ data.access_token);
+      sessionStorage.setItem("token", data.access_token);
+      
     })
+  
     .catch(function (error) {
-      console.log(error.data);
-      navigation("/Sign")
+      console.log("there was an error", error);
+      navigation("/Sign");
     });
-  };
+    
+};
   return (
     <div className='login-page'>
       <div className="login-container">
-        <h2>Login</h2>
+        
+        <h2 id="log">Login</h2>
+        
         <form method="POST">
+          
           <input
             type="email"
             name='email'
