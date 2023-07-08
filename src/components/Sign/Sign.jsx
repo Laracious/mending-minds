@@ -64,13 +64,6 @@ const Sign = () => {
             value={lname}
             onChange={(e) => setLname(e.target.value)}
           />
-<<<<<<< HEAD
-          {/* <select name="utype">
-            <option selected="selected" value="Genral user">General user</option>
-            <option value="Concilor">Concelor</option>
-        </select> */}
-=======
->>>>>>> 1c204264821921cb6c666e317bc3b48ade0c45d6
           <input
             type="email"
             name="email"

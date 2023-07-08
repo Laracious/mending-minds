@@ -17,19 +17,6 @@ const Login = ({ handleLogin }) => {
       navigation("/Home");
       localStorage.setItem("Auth", "true");
     }
-<<<<<<< HEAD
-
-
-    // const opts = {
-    //   method:"POST",
-    //   headers:{
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify({
-    //     email:email,
-    //     password:password
-    //   })
-    // }
     // fetch('http://127.0.0.1:5000/login', opts)
     // .then(response => {
     //   if (response.status == 200){
@@ -40,35 +27,15 @@ const Login = ({ handleLogin }) => {
     // .then(data => {
     //   console.log("this came from backend"+ data.access_token);
     //   sessionStorage.setItem("token", data.access_token);
-
+      
     // })
-
+  
     // .catch(function (error) {
     //   console.log("there was an error", error);
     //   navigation("/Sign");
     // });
-  }
-=======
-    fetch('http://127.0.0.1:5000/login', opts)
-    .then(response => {
-      if (response.status == 200){
-        navigation("/");
-        return response.json()
-      } else alert("there was an error");
-    })
-    .then(data => {
-      console.log("this came from backend"+ data.access_token);
-      sessionStorage.setItem("token", data.access_token);
-      
-    })
-  
-    .catch(function (error) {
-      console.log("there was an error", error);
-      navigation("/Sign");
-    });
     
 };
->>>>>>> 1c204264821921cb6c666e317bc3b48ade0c45d6
   return (
     <div className="login-page">
       <div className="login-container">
