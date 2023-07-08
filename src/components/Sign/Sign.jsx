@@ -21,6 +21,7 @@ const Sign = () => {
 
   function handleSignUp (){
     const opts = {
+      
       method:"POST",
       headers:{
         'Content-Type': 'application/json'
@@ -28,14 +29,13 @@ const Sign = () => {
       body: JSON.stringify({
         email:email,
         password:password,
-        fname:fname,
+        cpassword:cpassword,
         lname:lname,
-        cpassword:cpassword
-      })
-    }
-    fetch('http://127.0.0.1:5000/Sign', {
-      
-    })
+        fname:fname,
+
+      })}
+    fetch('http://127.0.0.1:5000/Sign', opts
+    )
     .then(function (response) {
       console.log(response);
       navigation("/Login");

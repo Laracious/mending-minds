@@ -62,7 +62,6 @@ def SignUP():
     lastName = request.json['lname']
     password = request.json['password']
     cpassword = request.json['cpassword']
-    utype = request.json['utype']
     
     user_exists = User.query.filter_by(email=email).first() is not None
 
@@ -76,15 +75,14 @@ def SignUP():
             "error":'Passwords do not match'
         }), 401
     hashed_ps = generate_password_hash(password)
-    new_user = User(email=email, password=hashed_ps, first_name=firstName, last_name=lastName, utype=utype)
+    new_user = User(email=email, password=hashed_ps, first_name=firstName, last_name=lastName)
     db.session.add(new_user)
     db.session.commit()
     return jsonify({
-        'id': new_user.id,
         'email':new_user.email,
+        'id': new_user.id,
         'first_name':new_user.first_name,
         'last_name':new_user.last_name,
-        'utype':new_user.utype
     })
 
 
