@@ -55,7 +55,7 @@ def Login():
 ######nset_jwt_cookies(resp)
     #return resp, 200
 
-@auth.route('/sign-up', methods=['GET', 'POST'])
+@auth.route('/Sign', methods=['GET', 'POST'])
 def SignUP():
     email =request.json['email']
     firstName = request.json['fname']
