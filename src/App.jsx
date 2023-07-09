@@ -5,6 +5,8 @@ import About from "./components/About/About";
 import Blog from "./components/Blog/Blog";
 import Login from "./components/Login/Login";
 import Sign from "./components/Sign/Sign";
+// import Test from './components/Test/Test';
+
 import Booking from "./components/Booking/Booking";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
@@ -38,6 +40,7 @@ function App() {
           element={<Login  />}
         />
         <Route path="/Sign" name="Sign" element={<Sign />} />
+        {/* <Route path="/Test" name="Test" element={<Test />} /> */}
       </Routes>
     </React.Fragment>
   );
