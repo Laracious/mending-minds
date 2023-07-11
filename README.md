@@ -48,4 +48,5 @@ This project is licensed under the [MIT License](https://opensource.org/licenses
 ## Contributors
 
 - [Lara Jimoh](omolaraamoke22@gmail.com)
-- 
+- [Masereka Benon ](benonkighoma@gmail.com)
+- [Irankunda Yvan David](irankundayvan2020@gmail.com)
