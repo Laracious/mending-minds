@@ -1,0 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;700&display=swap");
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	font-family: "Titillium Web", sans-serif;
+}
+
+:root {
+	--mainColorLight: #83BD75;
+	--mainColor: #4E944F;
+	--secondaryColor: #EAE509;
+	--textColor: #000;
+}
+
+.signUp-container {
+	width: 100vw;
+	height: 100vh;
+	/* padding-top: 100px; */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	/* background-color: #83BD75; */
+	background-image: url(https://cdn.pixabay.com/photo/2019/07/03/15/41/park-4314817_1280.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	
+}
+.signUp-container img{
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.signUp {
+	/* width: 80%;
+  height: 63%;
+	min-width: 40%;
+	min-height: 40%; */
+	width: 40vh;
+  height: 50vh;
+	/* min-height: 40%; */
+  /* max-width: 80%; */
+  margin: auto;
+  padding: 20px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
+}
+.signUp h2{
+	font-size: 3rem;
+	color: #fff;
+}

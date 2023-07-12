@@ -1,0 +1,172 @@
+@import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;700&display=swap");
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	font-family: "Titillium Web", sans-serif;
+}
+
+
+
+header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 80px;
+	width: 100vw;
+	padding: 0 4rem;
+	background-color: #fff;
+	position: fixed;
+	z-index: 100;
+	/* background-color: red; */
+	
+}
+header h1{
+	font-size: 2.5rem;
+	font-family: 'Times New Roman', Times, serif;
+	font-style: italic;
+}
+nav a {
+	/* margin: 0 1rem; */
+	font-size: 1.5rem;
+	color: #000;
+	text-decoration: none;
+}
+nav{
+	gap: 2rem;
+	margin-left: auto;
+}
+
+nav a:hover {
+	color: #0a810c;
+}
+.active {
+	color: #0a810c;
+}
+
+header .nav-btn {
+	padding: 5px;
+	cursor: pointer;
+	background: transparent;
+	border: none;
+	outline: none;
+	color: var(--textColor);
+	/* visibility: hidden; */
+	/* display: none; */
+	opacity: 0;
+	font-size: 1.8rem;
+}
+
+nav button{
+	width: 9rem;
+	height: 3rem;
+	font-size: 1.5rem;
+	border-radius: 10px;
+	border: 0;
+	cursor: pointer;
+}
+
+.sign-up{
+	display: flex;
+	justify-content: center;
+	/* text-align: center; */
+	align-items: center;
+	
+}
+nav button:hover {
+	color: #0a810c;
+}
+
+header div,
+nav {
+	display: flex;
+	align-items: center;
+}
+/* .login{
+	padding-left: rem;
+} */
+.greeting{
+	display: none;
+}
+.greeting1{
+	margin-left: auto;
+	font-size: 1.5rem;
+	color: #0a810c;
+}
+@media only screen and (max-width: 1024px) {
+	header .nav-btn {
+		visibility: visible;
+		opacity: 1;
+	}
+	header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		height: 80px;
+		width: 100vw;
+		padding: 0 2rem;
+		background-color: #fff;
+		position: fixed;
+		
+	}
+	header nav {
+		position: fixed;
+		top: -100vh;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 1.5rem;
+		background-color: var(--mainColor);
+		transition: 1s;
+	}
+	h1{
+		font-size: 1.5rem;
+	}
+
+	header .responsive_nav {
+		transform: translateY(100vh);
+		
+	}
+
+	nav .nav-close-btn {
+		position: absolute;
+		top: 2rem;
+		right: 2rem;
+	}
+
+	nav a {
+		font-size: 1.5rem;
+	}
+	
+	nav a:hover {
+		color: #fff;
+	}
+		
+	.active {
+		color: #fff;
+	}
+
+	nav button a:hover {
+		color: #0a810c;
+	}
+
+	nav button .active {
+		color: #0a810c;
+	}
+	.greeting{
+		display: block;
+		font-size: 1.2rem;
+	color: #fff;
+		/* float: right; */
+	}
+	
+	.greeting1{
+		display: none;
+	}
+
+}
