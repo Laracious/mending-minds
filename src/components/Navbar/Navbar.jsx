@@ -2,22 +2,26 @@ import { useRef } from "react";
 import { FaBars, FaTimes } from "react-icons/fa"; // imported icons from react-icons
 import "./navbar.css";
 import { NavLink } from "react-router-dom"; // import the 'NavLink' component from the React Router library.
+import { useNavigate } from "react-router-dom";
 
+naviagtion = useNavigate();
 function Navbar() {
   const navRef = useRef();
 
-  const auth = localStorage.getItem("Auth") ? true : false;
+  const token = localStorage.getItem("token") ? true : false;
 
   // ShowNavbar toggles the visibility of the navbar.c
   const showNavbar = () => {
     navRef.current.classList.toggle("responsive_nav");
-  };
-
+  }
   const handleLogOut = () => {
-    localStorage.removeItem("Auth");
-  };
+    localStorage.removeItem("token");
+    naviagtion("/Login");
+  }
+//logout handled from backend
 
-  const name = "Omolara";
+
+//find name from backend
   return (
     <header>
       <h1>Mending Minds</h1>
@@ -40,7 +44,7 @@ function Navbar() {
         >
           Blog
         </NavLink>
-        {!auth && (
+        {!token && (
           <>
             <NavLink
               className={({ isActive }) => (isActive ? "active" : "")}
@@ -59,13 +63,13 @@ function Navbar() {
           </>
         )}
         {/* display when it's Authenticated (logged in) */}
-        {auth && (
+        {!token && (
           <>
             <NavLink
               className={({ isActive }) => (isActive ? "active" : "")}
               to="/Booking"
             >
-              Appointment
+              Appointments
             </NavLink>
             <button className="logout" onClick={handleLogOut}>
               <NavLink
@@ -82,7 +86,7 @@ function Navbar() {
           <FaTimes />
         </button>
       </nav>
-      <span className="greeting1">Hi, {name}</span>
+      <span className="greeting1">Hi, {}</span>
       <button className="nav-btn" onClick={showNavbar}>
         <FaBars />
       </button>

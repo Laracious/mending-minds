@@ -27,7 +27,8 @@ class Appointment(db.Model):
     id = db.Column(db.String(32), primary_key=True, unique=True, default=get_uuid)
     created_at = db.Column(db.DateTime, nullable=False, default=func.now())
     scheduled_time = db.Column(db.DateTime, nullable=False)
-    approved = db.Column(db.Boolean, nullable=False,default=False)
+    issue = db.Column(db.String(150), nullable=False)
+    status = db.Column(db.Boolean, nullable=False,default=False)
     user_id = db.Column(db.String(32), db.ForeignKey('user.id'))
 
 #class Reminder() to do list send reminders of appoitment

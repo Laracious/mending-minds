@@ -13,29 +13,35 @@ const Login = ({ handleLogin }) => {
   // console.log(email);
 
   function handleLogin() {
-    if (email === "omolara@gmail.com" && password === "omolara") {
-      navigation("/Home");
-      localStorage.setItem("Auth", "true");
-    }
-    // fetch('http://127.0.0.1:5000/login', opts)
-    // .then(response => {
-    //   if (response.status == 200){
-    //     navigation("/");
-    //     return response.json()
-    //   } else alert("there was an error");
-    // })
-    // .then(data => {
-    //   console.log("this came from backend"+ data.access_token);
-    //   sessionStorage.setItem("token", data.access_token);
-      
-    // })
-  
-    // .catch(function (error) {
-    //   console.log("there was an error", error);
-    //   navigation("/Sign");
-    // });
-    
-};
+    //if (email === "omolara@gmail.com" && password === "omolara") {
+      //navigation("/Home");
+      //localStorage.setItem("Auth", "true");
+      const opts = {
+        method:"POST",
+        headers:{
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email:email,
+          password:password})
+        }
+      fetch('http://127.0.0.1:5000/login', opts)
+      .then(response => {
+        if (response.status == 200){
+          navigation("/Test");
+          return response.json()
+        }else alert("there was an error");
+      })
+      .then(data => {
+        
+        localStorage.setItem("token", data.access_token);
+        console.log("this came from backend"+ token);
+      })
+      .catch(function (error) {
+        console.log("there was an error", error);
+        navigation("/Sign");
+      });
+    };
   return (
     <div className="login-page">
       <div className="login-container">
@@ -58,7 +64,7 @@ const Login = ({ handleLogin }) => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button type="button" onClick={handleLogin(email, password)}>
+          <button type="button" onClick={handleLogin}>
             Login
           </button>
         </form>

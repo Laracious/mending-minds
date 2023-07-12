@@ -1,10 +1,17 @@
 #This the authentication bluebrint of our app
-from flask import Blueprint, request, jsonify, session
-from web.models import User, db
+from flask import Blueprint, request, jsonify
+from web.models import User, db, Appointment
+
+
+
+import json
+import jsonpickle
 #jwt sessions libs
 from flask_jwt_extended import (
-    create_access_token
+    create_access_token,create_refresh_token,get_jwt,
+    get_jwt_identity,jwt_required,
 ) 
+
 
 #secure password
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -30,30 +37,22 @@ def Login():
             "error":"Un auth"
         }), 409
     #create the tokens we will be sending back to the user
-    access_token = create_access_token(identity=email)
-    #refresh_token = create_refresh_token(identity=User.id)
+    access_token = create_access_token(identity=user.id)
+    refresh_token = create_refresh_token(identity=user.id)
     resp=jsonify({
-        'access_token': access_token 
+        'access_token': access_token,
+        'refesh_token': refresh_token
     })
-    #set jwt cookies in response
-    #set_access_cookies(resp, access_token)
-    #set_refresh_cookies(resp,refresh_token)
+
     return resp, 200
 
-#@auth.route('/refresh', methods=['POST'])
-#def Refresh():
-    #create the new access token
-    
- #   access_token  = create_access_token(identity=current_user)
-    # set jwt in response
-  #  rep = jsonify({
-    #    "login":True
-   #     })
-   # set_access_cookies(rep, access_token)
-    #return rep, 200
-
-######nset_jwt_cookies(resp)
-    #return resp, 200
+@auth.route('/refresh', methods=['POST'])
+def Refresh():
+    user_id = get_jwt_identity()
+    resp = {
+        'acces_token':create_access_token(identity=user_id)
+    }
+    return resp, 200
 
 @auth.route('/Sign', methods=['GET', 'POST'])
 def SignUP():
@@ -84,7 +83,61 @@ def SignUP():
         'first_name':new_user.first_name,
         'last_name':new_user.last_name,
     })
+#return curent logged in in user
+@auth.route("/@me",methods=['GET'])
+@jwt_required()
+def get_current_user():
+    current_user_id = get_jwt_identity()
+    
+    if not current_user_id:
+        return jsonify({
+            'error':'User not logged in'
+        }), 401
+    user = User.query.filter_by(id=current_user_id).first()
+    return jsonify({
+        'id': user.id,
+        'email':user.email,
+        'first_name':user.first_name,
+        'last_name':user.last_name,
+    })
+
+@auth.route("/appointment", methods=['GET','POST'])
+@jwt_required
+def make_appoitment():
+    current_user_id = get_jwt_identity()
+    if not current_user_id:
+        return jsonify({
+            'error': 'User not logged in'
+        }), 401
+    
+    sheduled_time = request.json['sheduled_time']
+    approved = request.json['approved']
+
+    appoitments = Appointment.query.filter_by(user_id=current_user_id)
+
+    if appoitments is None:
+        return jsonify({
+            "error": "User has no appointments"
+            }), 401
+    if request.method == "GET":
+        # check for approved appointments
+        if appoitments.status == True:
+            return jsonify({
+                "sheduled_time": appoitments.sheduled_time,
+                "issue": appoitments.issue,
+                "status":appoitments.status
+                })
+        
+    new_appoitment = Appointment(sheduled_time=sheduled_time,approved=approved)
+    db.session.add(new_appoitment)
+    db.session.commit()
+    return jsonify({
+        "id": new_appoitment.id,
+        "created_at":new_appoitment.created_at,
+        "scheduled_time":new_appoitment.scheduled_time,
+        "user_id":new_appoitment.user_id
+    })
+    
 
 
-
-
+    
