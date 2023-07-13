@@ -71,7 +71,7 @@ const Sign = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          
+
           <input
             type="password"
             name="password"
@@ -90,6 +90,9 @@ const Sign = () => {
           <button type="button" onClick={handleSignUp}>
             Sign Up
           </button>
+          <p className="alternative">
+            Have an account? <a href="./login">Login</a>{" "}
+          </p>
         </form>
       </div>
     </div>

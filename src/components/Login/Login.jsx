@@ -61,6 +61,9 @@ const Login = ({ handleLogin }) => {
           <button type="button" onClick={handleLogin(email, password)}>
             Login
           </button>
+          <p className="alternative">
+            Don't an account? <a href="./sign">Sign up</a>{" "}
+            </p>
         </form>
       </div>
     </div>
