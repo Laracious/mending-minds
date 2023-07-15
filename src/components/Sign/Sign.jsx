@@ -12,6 +12,7 @@ const Sign = () => {
   const [password,setPassword] = useState('');
   const [cpassword, setCpassword] = useState('');
  
+ 
 
 
   // console.log(formData);
@@ -45,6 +46,9 @@ const Sign = () => {
 
     });
   };
+
+
+
   return (
     <div className="signUp-container">
       <div className="signUp">
