@@ -40,8 +40,8 @@ def create_app():
     from web.views import views
     from web.auth import auth
 
-    app.register_blueprint(views, url_prfix='/views/')
-    app.register_blueprint(auth, url_prefix='/auth/')
+    app.register_blueprint(views, url_prfix='/')
+    app.register_blueprint(auth, url_prefix='/')
 
     
     with app.app_context():

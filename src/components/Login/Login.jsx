@@ -26,7 +26,7 @@ const Login = ({ handleLogin }) => {
           email:email,
           password:password})
         }
-      fetch('http://127.0.0.1:5000/auth/login', opts)
+      fetch('http://127.0.0.1:5000/login', opts)
       .then(response => {
         if (response.status == 200){
           navigation("/Home");
@@ -46,7 +46,7 @@ const Login = ({ handleLogin }) => {
               'Authorization': `JWT ${token}`
             }
           }
-          fetch('http://127.0.0.1:5000/auth/@me', opts)
+          fetch('http://127.0.0.1:5000/@me', opts)
           .then(response => {
             if (response.status == 200){
               return response.json()

@@ -15,8 +15,20 @@ auth = Blueprint('auth', __name__)
 
 @auth.route('/login', methods=['POST'])
 def Login():
-    email = request.json.get('email', None)
-    password = request.json.get('password', None)
+    email = request.json.get('email')
+    password = request.json.get('password')
+
+    if len(email) < 1:
+        return jsonify(
+            {
+                "error":"email required"
+                }
+                )
+    elif len(password)< 1:
+        return jsonify({
+            "error":"passsword Required"}
+            )
+    
     
     #query db for credentials
     
@@ -24,12 +36,12 @@ def Login():
     
     if user is None:
         return jsonify ({
-                "error":"Un autorized"
+                "error":"Unautorized"
         }), 401
     
     if not check_password_hash(user.password, password):
         return jsonify({
-            "error":"Un auth"
+            "error":"Incorrect password"
         }), 409
     #create the tokens we will be sending back to the user
     access_token = create_access_token(identity=user.id)
