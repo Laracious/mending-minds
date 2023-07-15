@@ -12,6 +12,9 @@ function Navbar() {
   const showNavbar = () => {
     navRef.current.classList.toggle("responsive_nav");
   };
+   const handleClick = () => {
+     showNavbar(false);
+   };
 
   const handleLogOut = () => {
     localStorage.removeItem("Auth");
@@ -25,18 +28,21 @@ function Navbar() {
         <NavLink
           className={({ isActive }) => (isActive ? "active" : "")}
           to="/Home"
+          onClick={handleClick}
         >
           Home
         </NavLink>
         <NavLink
           className={({ isActive }) => (isActive ? "active" : "")}
           to="/About"
+          onClick={handleClick}
         >
           About
         </NavLink>
         <NavLink
           className={({ isActive }) => (isActive ? "active" : "")}
           to="/Blog"
+          onClick={handleClick}
         >
           Blog
         </NavLink>
@@ -45,6 +51,7 @@ function Navbar() {
             <NavLink
               className={({ isActive }) => (isActive ? "active" : "")}
               to="/Login"
+              onClick={handleClick}
             >
               Login
             </NavLink>
@@ -52,6 +59,7 @@ function Navbar() {
               <NavLink
                 className={({ isActive }) => (isActive ? "active" : "")}
                 to="/Sign"
+                onClick={handleClick}
               >
                 Sign up
               </NavLink>
@@ -64,6 +72,7 @@ function Navbar() {
             <NavLink
               className={({ isActive }) => (isActive ? "active" : "")}
               to="/Booking"
+              onClick={handleClick}
             >
               Appointment
             </NavLink>
@@ -71,18 +80,19 @@ function Navbar() {
               <NavLink
                 className={({ isActive }) => (isActive ? "active" : "")}
                 to="/Home"
+                onClick={handleClick}
               >
                 Log out
               </NavLink>
             </button>
           </>
         )}
-        <span className="greeting">Hi, {name}</span>
+        {auth && <span className="greeting1">Hi, {name}</span>}
         <button className="nav-btn nav-close-btn" onClick={showNavbar}>
           <FaTimes />
         </button>
       </nav>
-      <span className="greeting1">Hi, {name}</span>
+      {auth && <span className="greeting1">Hi, {name}</span>}
       <button className="nav-btn" onClick={showNavbar}>
         <FaBars />
       </button>
