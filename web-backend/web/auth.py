@@ -1,15 +1,10 @@
 #This the authentication bluebrint of our app
 from flask import Blueprint, request, jsonify
-from web.models import User, db, Appointment
+from web.models import User, db, Appointment, Userstory
 
-
-
-import json
-import jsonpickle
 #jwt sessions libs
 from flask_jwt_extended import (
-    create_access_token,create_refresh_token,get_jwt,
-    get_jwt_identity,jwt_required,
+    create_access_token,get_jwt_identity,jwt_required,
 ) 
 
 
@@ -38,20 +33,10 @@ def Login():
         }), 409
     #create the tokens we will be sending back to the user
     access_token = create_access_token(identity=user.id)
-    refresh_token = create_refresh_token(identity=user.id)
     resp=jsonify({
-        'access_token': access_token,
-        'refesh_token': refresh_token
+        'access_token': access_token
     })
 
-    return resp, 200
-
-@auth.route('/refresh', methods=['POST'])
-def Refresh():
-    user_id = get_jwt_identity()
-    resp = {
-        'acces_token':create_access_token(identity=user_id)
-    }
     return resp, 200
 
 @auth.route('/Sign', methods=['GET', 'POST'])
@@ -83,23 +68,7 @@ def SignUP():
         'first_name':new_user.first_name,
         'last_name':new_user.last_name,
     })
-#return curent logged in in user
-@auth.route("/@me",methods=['GET'])
-@jwt_required()
-def get_current_user():
-    current_user_id = get_jwt_identity()
-    
-    if not current_user_id:
-        return jsonify({
-            'error':'User not logged in'
-        }), 401
-    user = User.query.filter_by(id=current_user_id).first()
-    return jsonify({
-        'id': user.id,
-        'email':user.email,
-        'first_name':user.first_name,
-        'last_name':user.last_name,
-    })
+
 
 @auth.route("/appointment", methods=['GET','POST'])
 @jwt_required
@@ -111,9 +80,8 @@ def make_appoitment():
         }), 401
     
     sheduled_time = request.json['sheduled_time']
-    approved = request.json['approved']
-
-    appoitments = Appointment.query.filter_by(user_id=current_user_id)
+    created_at = request.json['created_at']
+    appoitments = Appointment.query.filter_by(sheduled_time=sheduled_time)
 
     if appoitments is None:
         return jsonify({
@@ -128,7 +96,7 @@ def make_appoitment():
                 "status":appoitments.status
                 })
         
-    new_appoitment = Appointment(sheduled_time=sheduled_time,approved=approved)
+    new_appoitment = Appointment(sheduled_time=sheduled_time,created_at=created_at)
     db.session.add(new_appoitment)
     db.session.commit()
     return jsonify({
@@ -137,6 +105,20 @@ def make_appoitment():
         "scheduled_time":new_appoitment.scheduled_time,
         "user_id":new_appoitment.user_id
     })
+@auth.route("/@me",methods=['GET'])
+@jwt_required()
+def get_current_user():
+    current_user_id = get_jwt_identity()
+    
+    if not current_user_id:
+        return jsonify({
+            'error':'User not logged in'
+        }), 401
+    user = User.query.filter_by(id=current_user_id).first()
+    return jsonify({
+        'first_name':user.first_name
+    })
+
     
 
 

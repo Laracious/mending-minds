@@ -31,7 +31,5 @@ class Appointment(db.Model):
     status = db.Column(db.Boolean, nullable=False,default=False)
     user_id = db.Column(db.String(32), db.ForeignKey('user.id'))
 
-#class Reminder() to do list send reminders of appoitment
-
 
 

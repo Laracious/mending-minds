@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./login.css";
 import { useNavigate } from "react-router";
 
+
 const token = localStorage.getItem("token");
 
 const Login = ({ handleLogin }) => {
@@ -25,10 +26,10 @@ const Login = ({ handleLogin }) => {
           email:email,
           password:password})
         }
-      fetch('http://127.0.0.1:5000/login', opts)
+      fetch('http://127.0.0.1:5000/auth/login', opts)
       .then(response => {
         if (response.status == 200){
-          navigation("/Test");
+          navigation("/Home");
           return response.json()
         }else alert("there was an error");
       })
@@ -36,12 +37,35 @@ const Login = ({ handleLogin }) => {
         
         localStorage.setItem("token", data.access_token);
         console.log("this came from backend"+ token);
-      })
-      .catch(function (error) {
-        console.log("there was an error", error);
-        navigation("/Sign");
-      });
-    };
+      }).then(
+        function name() {
+          const opts = {
+            method:"GET",
+            headers:{
+              'Content-Type': 'application/json',
+              'Authorization': `JWT ${token}`
+            }
+          }
+          fetch('http://127.0.0.1:5000/auth/@me', opts)
+          .then(response => {
+            if (response.status == 200){
+              return response.json()
+            } else alert("there was an error");
+          })
+          .then(data => {
+            location.reload(false);
+            localStorage.setItem("loggedin_user", data.first_name);
+            console.log("user"+ data.first_name);
+          })
+          .catch(function (err) {
+            console.log("there was an eror", err);
+          })
+        })
+        .catch(function (error) {
+          console.log("there was an error", error);
+          navigation("/Sign");
+        });
+      };
   return (
     <div className="login-page">
       <div className="login-container">
@@ -64,7 +88,10 @@ const Login = ({ handleLogin }) => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button type="button" onClick={handleLogin}>
+          <button type="button" onClick={() =>{
+            handleLogin()
+            }
+            }>
             Login
           </button>
         </form>
