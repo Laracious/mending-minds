@@ -10,8 +10,7 @@ body{
 .container{
   display: flex;
   justify-content:  space-between;
-  padding: 13px 5%;
-  padding-top: 5rem;
+  padding: 100px 40px 40px 40px;;
   z-index: -1;
 }
 
@@ -21,13 +20,80 @@ body{
   top: 70px;
   align-self: flex-start;
 }
-
-.right-sidebar{
-  flex-basis: 73%;
+.right-sidebar1{
+  flex-basis: 36.5%;
   position: sticky;
   top: 70px;
   align-self: flex-start;
+  width: 350px;
+  /* height: 500vh;
+  background: #18f24b; */
 }
+.counsellor{
+  width: 350px;
+  background-color: #fff;
+  border: 1px solid #444;
+  margin: 20px;
+}
+.counsellor-img{
+  width: 100%;
+  height: auto;
+}
+.counsellor-img img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.counsellor-text{
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.counsellor-text span{
+  color: #03642c;
+  font-size: 20px;
+}
+.counsellor-text .counsellor-title{
+  font: 1.3rem;
+  font-weight: 500;
+  
+}
+.counsellor-text .counsellor-title:hover{
+  font-size: 1rem;
+  color: #0cd05e;
+  transition: all ease 0.3s;
+}
+
+.counsellor-text p{
+  font-size: 17px;
+  font-weight: 100;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis ;
+  margin: 20px 0px;
+}
+.counsellor-text a:hover{
+  
+  color: #0cd05e;
+  transition: all ease 0.3s;
+}
+.book-button img{
+  width: 100px;
+  border-radius: 50%;
+  margin-right: 18px;
+}
+.right-sidebar{
+  flex-basis: 36.5%;
+  position: sticky;
+  top: 70px;
+  align-self: flex-start;
+  background: #0cd05e;
+}
+
 
 .imp-links a, .shortcut-links a{
   text-decoration: none;
@@ -216,10 +282,11 @@ body{
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
   border-radius: 4px;
   overflow: hidden;
-  top: 0%;
+  top: 5%;
   right: 5%;
   max-height: 0;
   transition: max-height 0.3s;
+  align-items: center;
 }
 .settings-menu-height{
   max-height: 450px;
@@ -255,4 +322,22 @@ body{
   justify-content: space-between;
   text-decoration: none;
   color: #626262;
+}
+
+.date {
+  position: relative;
+  display: inline-block;
+}
+
+.date-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+.date:hover .date-content{
+  display: block;
 }
