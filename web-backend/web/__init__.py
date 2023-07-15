@@ -1,9 +1,6 @@
-from flask import Flask
+from flask import Flask,jsonify
 from flask_sqlalchemy import SQLAlchemy
 import os
-
-
-
 from flask_jwt_extended import JWTManager
 from dotenv import load_dotenv
 from flask_cors import CORS
@@ -26,24 +23,27 @@ def create_app():
     app.config["JWT_SECRET_KEY"] = os.environ['SECRET_KEY']
    # app.config['JWT_ACCESS_COOKIE_PATH'] = '/'
    # app.config['JWT_REFRESH_COOKIE_PATH'] = '/'
-   # app.config['JWT_COOKIE_CSRF_PROTECT'] = True
+    app.config['JWT_COOKIE_CSRF_PROTECT'] = False
+    app.config["JWT_HEADER_TYPE"] = "JWT"
     #app.config['JWT_COOKIE_SECURE'] = False
    # app.config['JWT_TOKEN_LOCATION'] = ['cookies']
    # app.config['PROPAGATE_EXCEPTIONS'] = True
 
     jwt = JWTManager(app)
     db.init_app(app)
-    
-    
+
+    # define classes before db creation
+    #from web.models import User,Userstory,Appointment
+
+    #load users,roles for a session
     #Register bluebrint
     from web.views import views
     from web.auth import auth
 
-    app.register_blueprint(views, url_prefix="/login/")
+    app.register_blueprint(views, url_prfix='/')
     app.register_blueprint(auth, url_prefix='/')
 
-    # define classes before db creation
-    from web.models import User,Userstory,Appointment
+    
     with app.app_context():
         db.create_all()
     

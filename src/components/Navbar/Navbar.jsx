@@ -2,25 +2,39 @@ import { useRef } from "react";
 import { FaBars, FaTimes } from "react-icons/fa"; // imported icons from react-icons
 import "./navbar.css";
 import { NavLink } from "react-router-dom"; // import the 'NavLink' component from the React Router library.
+import { useNavigate } from "react-router-dom";
+
 
 function Navbar() {
   const navRef = useRef();
-
-  const auth = localStorage.getItem("Auth") ? true : false;
+  const token = localStorage.getItem("token") ? true : false;
+  console.log(token);
 
   // ShowNavbar toggles the visibility of the navbar.c
   const showNavbar = () => {
     navRef.current.classList.toggle("responsive_nav");
+<<<<<<< HEAD
   };
    const handleClick = () => {
      showNavbar(false);
    };
 
+=======
+  }
+  let navigation = useNavigate()
+>>>>>>> 440769d8f6e59e63a8c90cb3cb11f2780c885ae7
   const handleLogOut = () => {
-    localStorage.removeItem("Auth");
-  };
+    localStorage.removeItem("token");
+    
+    navigation("/Login");
+  }
+//logout handled from backend
+  let name = localStorage.getItem("loggedin_user");
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+   name = capitalizeFirstLetter(name)
 
-  const name = "Omolara";
   return (
     <header>
       <h1>Mending Minds</h1>
@@ -46,7 +60,7 @@ function Navbar() {
         >
           Blog
         </NavLink>
-        {!auth && (
+        {!token && (
           <>
             <NavLink
               className={({ isActive }) => (isActive ? "active" : "")}
@@ -67,14 +81,14 @@ function Navbar() {
           </>
         )}
         {/* display when it's Authenticated (logged in) */}
-        {auth && (
+        {token && (
           <>
             <NavLink
               className={({ isActive }) => (isActive ? "active" : "")}
               to="/Booking"
               onClick={handleClick}
             >
-              Appointment
+              Appointments
             </NavLink>
             <button className="logout" onClick={handleLogOut}>
               <NavLink
@@ -85,8 +99,13 @@ function Navbar() {
                 Log out
               </NavLink>
             </button>
-          </>
+          <span className="greeting1">Hi, {name}</span>
+            <button className="nav-btn" onClick={showNavbar}>
+            <FaBars />
+          </button>
+        </>
         )}
+<<<<<<< HEAD
         {auth && <span className="greeting1">Hi, {name}</span>}
         <button className="nav-btn nav-close-btn" onClick={showNavbar}>
           <FaTimes />
@@ -96,6 +115,9 @@ function Navbar() {
       <button className="nav-btn" onClick={showNavbar}>
         <FaBars />
       </button>
+=======
+      </nav>
+>>>>>>> 440769d8f6e59e63a8c90cb3cb11f2780c885ae7
     </header>
   );
 }
