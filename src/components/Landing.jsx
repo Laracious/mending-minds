@@ -1,5 +1,6 @@
 
 const Landing = () => {
+  
   return (
     <div className="landing-page">
       <section className="landing">

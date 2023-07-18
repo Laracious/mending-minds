@@ -27,10 +27,18 @@ class Appointment(db.Model):
     id = db.Column(db.String(32), primary_key=True, unique=True, default=get_uuid)
     created_at = db.Column(db.DateTime, nullable=False, default=func.now())
     scheduled_time = db.Column(db.DateTime, nullable=False)
-    approved = db.Column(db.Boolean, nullable=False,default=False)
+    issue = db.Column(db.String(150), nullable=False)
+    status = db.Column(db.Boolean, nullable=False,default=False)
     user_id = db.Column(db.String(32), db.ForeignKey('user.id'))
+    co_id =db.Column(db.String(32), db.ForeignKey('counsilor.id'))
 
-#class Reminder() to do list send reminders of appoitment
+class Counsilor(db.Model):
+    id = db.Column(db.String(32), primary_key=True, unique=True, default=get_uuid())
+    Name = db.Column(db.String(32), nallable=False)
+    email = db.Column(db.String(32), nullable=False)
+    password = db.Column(db.String(32), nullable=False)
+
+
 
 
 

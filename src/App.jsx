@@ -10,7 +10,6 @@ import Sign from "./components/Sign/Sign";
 import Booking from "./components/Booking/Booking";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
-import Notfound from "./components/404/Notfound";
 
 function App() {
 // const [isAuthenticated, setIsAuthenticated ] = useState( false );
@@ -28,7 +27,6 @@ function App() {
     <React.Fragment>
       <Navbar />
       <Routes>
-        <Route path="/404" name="Notfound" element={<Notfound />} />
         <Route path="/" name="Landing" element={<Landing />} />
         <Route path="/Home" name="Home" element={<Home />} />
         <Route path="/About" name="About" element={<About />} />
