@@ -12,12 +12,14 @@ from flask_cors import CORS
 
 #databse environment variables
 load_dotenv()
+
 db = SQLAlchemy()
 
 def create_app():
     app = Flask(__name__)
     CORS(app, supports_credentials=True)
-    app.config['SQLALCMEY_TRACK_MODIFICATIONS'] = os.environ['SQLALCHEMY_TRACK_MODIFICATIONS']
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    # app.config['SQLALCMEY_TRACK_MODIFICATIONS'] = os.environ['SQLALCHEMY_TRACK_MODIFICATIONS']
     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://'+os.environ['DB_USER']+':'+os.environ['USER_PWD']+ '@'+ os.environ['HOST']+'/'+ os.environ['DB_NAME']
     app.config['SQLALCHEMY_ECHO'] = os.environ['SQLALCHEMY_ECHO']
     app.config['CORS_HEADERS'] = 'Content-Type'
