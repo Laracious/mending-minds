@@ -8,22 +8,22 @@ import { NavLink } from "react-router-dom"; // import the 'NavLink' component fr
 function Navbar() {
   const navRef = useRef();
   const token = localStorage.getItem("token") ? true : false;
-  console.log(token);
+  // console.log(token);
 
   // ShowNavbar toggles the visibility of the navbar
   const showNavbar = () => {
     navRef.current.classList.toggle("responsive_nav");
   };
-   const handleClick = () => {
-     showNavbar(false);
-   };
+  const handleClick = () => {
+    showNavbar(false);
+  };
 
   const handleLogOut = () => {
     localStorage.removeItem("token");
-    
+
     navigation("/Login");
-  }
-//logout handled from backend
+  };
+  //logout handled from backend
   let name = localStorage.getItem("loggedin_user");
 
   function capitalizeFirstLetter(str) {
@@ -37,13 +37,16 @@ function Navbar() {
     return firstLetter + restOfLetters;
   }
   // function capitalizeFirstLetter(string) {
-    // return string.charAt(0).toUpperCase() + string.slice(1);
-    // }
-   name = capitalizeFirstLetter(name)
+  // return string.charAt(0).toUpperCase() + string.slice(1);
+  // }
+  name = capitalizeFirstLetter(name);
 
   return (
     <header>
+    <div className="logo">
+
       <h1>Mending Minds</h1>
+    </div>
       <nav ref={navRef}>
         <NavLink
           className={({ isActive }) => (isActive ? "active" : "")}
@@ -105,13 +108,21 @@ function Navbar() {
                 Log out
               </NavLink>
             </button>
-          <span className="greeting1">Hi, {name}</span>
-            <button className="nav-btn" onClick={showNavbar}>
-            <FaBars />
-          </button>
-        </>
+          </>
         )}
+        <span className="greeting">Hi, {name}</span>
+        {/* button to close navbar on mobile */}
+        <button className="nav-btn nav-close-btn" onClick={showNavbar}>
+          <FaTimes />
+        </button>
       </nav>
+      {/* display greeting when authenticated */}
+      <span className="greeting1">Hi, {name}</span>
+
+      {/* Hambuger button to open navbar menu */}
+      <button className="nav-btn" onClick={showNavbar}>
+        <FaBars />
+      </button>
     </header>
   );
 }
