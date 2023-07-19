@@ -43,7 +43,7 @@ const Login = ({ handleLogin }) => {
             method:"GET",
             headers:{
               'Content-Type': 'application/json',
-              'Authorization': `JWT ${token}`
+              'Authorization': `Bearer ${token}`
             }
           }
           fetch('http://127.0.0.1:5000/@me', opts)
