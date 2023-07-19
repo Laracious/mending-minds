@@ -1,6 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;700&display=swap");
+
 *{
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
   font-family: 'poppins', sans-serif;
 }
 body{
@@ -8,26 +11,39 @@ body{
 }
 
 .container{
+  /* background-image: linear-gradient(transparent, rgba(0,0,0,0.5)),url(images/yours.jpeg); */
   display: flex;
   justify-content:  space-between;
-  padding: 100px 40px 40px 40px;;
-  z-index: -1;
+  flex-direction: column;
+  padding: 100px 40px 40px 40px;
+  align-items: center;
 }
 
 .left-sidebar{
   flex-basis: 25%;
-  position: sticky;
+  flex: wrap;
+  /* position: sticky; */
   top: 70px;
   align-self: flex-start;
 }
 .right-sidebar1{
   flex-basis: 36.5%;
-  position: sticky;
+  /* position: sticky; */
   top: 70px;
-  align-self: flex-start;
+  /* align-self: flex-start; */
   width: 350px;
+  /* flex-direction: column; */
   /* height: 500vh;
   background: #18f24b; */
+}
+.right-sidebar{
+  flex-basis: 36.5%;
+  /* position: sticky; */
+  top: 70px;
+  /* flex-direction: column; */
+  align-self: flex-start;
+  background: #0cd05e;
+
 }
 .counsellor{
   width: 350px;
@@ -85,13 +101,6 @@ body{
   width: 100px;
   border-radius: 50%;
   margin-right: 18px;
-}
-.right-sidebar{
-  flex-basis: 36.5%;
-  position: sticky;
-  top: 70px;
-  align-self: flex-start;
-  background: #0cd05e;
 }
 
 
@@ -341,3 +350,143 @@ body{
 .date:hover .date-content{
   display: block;
 }
+
+@media only screen and (max-width: 1250px){
+  .container{
+    display: flex;
+    justify-content:  space-between;
+    /* flex-direction: column; */
+    flex-direction: row;
+    padding: 100px 40px 40px 40px;
+    align-items: center;
+  }
+}
+.app-btn{
+  padding: 10px 60px;
+  background: #fff;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+  font-size: 22px;
+  font-weight: 500;
+  border-radius: 30px;
+}
+.popup-form{
+  width: 400px;
+  background: #fff;
+  border-radius: 6px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) /* scale(0.1) */;
+  text-align: center;
+  padding: 1rem; /* i am not sure */
+  color:#333;
+  transition: transform 0.4s, top 0.4s;
+  /* visibility: hidden; */
+}
+.open-popup{
+  visibility: visible;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1);
+
+}
+.popup-form span{
+  font-size: 20px;
+  font-weight: 500;
+  margin: 30px 0 10px;
+  /* padding: 10px;
+  top: 20px; */
+
+}
+.popup-form button{
+  width: 100px;
+  margin-top: 50px;
+  padding: 10px 0;
+  background: #6fd649;
+  color: #fff;
+  border: 0;
+  outline: none;
+  font-size: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2); 
+}
+form{
+  width: 90%;
+  max-width: 600px;
+}
+.input-group{
+  margin-bottom: 30px;
+  position: relative;
+}
+input, textarea, select{
+  width: 100%;
+  padding: 10px;
+  outline: 0;
+  border: 1px solid #fff;
+  background: rgb(85, 239, 85);
+  font-size: 15px;
+}
+label{
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 10px;
+  color:#16ad28;
+  cursor: text;
+  transition: 0.2s;
+}
+button{
+  padding: 10px;
+  color: #780c0c;
+  outline: none;
+  background: green;
+  border: 1px solid #fff;
+  width: 100%;
+  cursor: pointer;
+}
+input:focus~label, input:valid~label
+textarea:focus~label, textarea:valid~label{
+  top: -35px;
+  font-size: 14px;
+}
+
+.wrapper {
+  width: min(900px, 100% - 3rem);
+  margin-inline: auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #3078a2;
+}
+
+caption,
+th,
+td {
+  padding: 1rem;
+}
+caption,
+th {
+  text-align: left;
+}
+caption {
+  background: hsl(120, 86%, 46%);
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+th {
+  background: hsla(144, 76%, 49%, 0.5);
+}
+
+tr:nth-of-type(2n) {
+  background: hsl(144, 76%, 49% / 0.1);
+}
+.table-container {
+  max-width: 100%;
+  /* overflow-x: auto; */
+} 
