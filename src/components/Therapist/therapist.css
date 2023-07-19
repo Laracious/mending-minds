@@ -378,15 +378,13 @@ body{
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) /* scale(0.1) */;
+  transform: translate(-50%, -50%);
   text-align: center;
   padding: 1rem; /* i am not sure */
   color:#333;
-  transition: transform 0.4s, top 0.4s;
-  /* visibility: hidden; */
+  transition: top 0.3s;
 }
-.open-popup{
-  visibility: visible;
+.openpopup{
   top: 50%;
   transform: translate(-50%, -50%) scale(1);
 
@@ -489,4 +487,7 @@ tr:nth-of-type(2n) {
 .table-container {
   max-width: 100%;
   /* overflow-x: auto; */
-} 
+}
+td select {
+  width: 100px;
+}
