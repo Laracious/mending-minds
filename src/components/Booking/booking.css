@@ -385,6 +385,12 @@ body{
   transition: transform 0.4s, top 0.4s;
   /* visibility: hidden; */
 }
+
+.popup-form-btnContainer {
+display: flex;
+justify-content: space-around;
+}
+
 .open-popup{
   visibility: visible;
   top: 50%;

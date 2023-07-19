@@ -94,7 +94,7 @@ function Navbar() {
               to="/Booking"
               onClick={handleClick}
             >
-              Appointments
+              Bookings
             </NavLink>
             <button className="logout" onClick={handleLogOut}>
               <NavLink

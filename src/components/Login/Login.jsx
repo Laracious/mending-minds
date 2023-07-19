@@ -14,9 +14,10 @@ const Login = ({ handleLogin }) => {
   // console.log(email);
 
   function handleLogin() {
-    //if (email === "omolara@gmail.com" && password === "omolara") {
-      //navigation("/Home");
-      //localStorage.setItem("Auth", "true");
+    // if (email === "omolara@gmail.com" && password === "omolara") {
+    //   navigation("/Home");
+    //   localStorage.setItem("token", "true");
+    // }
       const opts = {
         method:"POST",
         headers:{

@@ -7,7 +7,12 @@
 	font-family: "Titillium Web", sans-serif;
 }
 
-
+:root {
+	--mainColorLight: #83BD75;
+	--mainColor: #4E944F;
+	--secondaryColor: #EAE509;
+	--textColor: #000;
+}
 
 header {
 	display: flex;
@@ -65,15 +70,33 @@ nav button{
 	border-radius: 10px;
 	border: 0;
 	cursor: pointer;
-}
-
-.sign-up{
+	background-color: var(--mainColorLight);
 	display: flex;
 	justify-content: center;
 	/* text-align: center; */
 	align-items: center;
-	
 }
+
+/* .sign-up {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+} */
+
+.sign-up a:hover {
+	color: #fff;
+}
+
+.logout a{
+	color: var(--textColor)
+}
+
+.logout a:hover {
+	color: #fff;
+}
+
+
+
 nav button:hover {
 	color: #0a810c;
 }
@@ -152,11 +175,11 @@ nav {
 	}
 
 	nav button a:hover {
-		color: #0a810c;
+		color: #4aec4d;
 	}
 
 	nav button .active {
-		color: #0a810c;
+		color: #aaf5ac;
 	}
 	.greeting{
 		display: block;
