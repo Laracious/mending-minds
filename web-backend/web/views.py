@@ -20,10 +20,10 @@ def approve_appointment():
         return jsonify({
             "error":"User not logged in"
         })
-    appoitment = Appointment.query.filter_by(user_id=current_user_id)
-    if appoitment.id == id:
-        appoitment.status == True
-    db.session.commit(appoitment)
+    appointments = Appointment.query.filter_by(user_id=current_user_id)
+    if appointments.id == id:
+        appointments.status == True
+    db.session.commit(appointments)
     return jsonify({
         {
             "updated": appoitment.id

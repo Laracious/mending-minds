@@ -7,8 +7,8 @@ import axios from 'axios';
 
 const Sign = () => {
   const [email, setEmail] = useState('');
-  const [fname, setFname] = useState('');
-  const [lname, setLname] = useState('');
+  const [first_name, setFname] = useState('');
+  const [last_name, setLname] = useState('');
   const [password,setPassword] = useState('');
   const [cpassword, setCpassword] = useState('');
  
@@ -42,8 +42,8 @@ const Sign = () => {
         email:email,
         password:password,
         cpassword:cpassword,
-        lname:lname,
-        fname:fname,
+        last_name:last_name,
+        first_name:first_name,
 
       })}
     fetch('http://127.0.0.1:5000/Sign', opts
@@ -69,14 +69,14 @@ const Sign = () => {
             type="text"
             name="fname"
             placeholder="First name"
-            value={fname}
+            value={first_name}
             onChange={(e) => setFname(e.target.value)}
           />
           <input
             type="text"
             name="lname"
             placeholder="Last name"
-            value={lname}
+            value={last_name}
             onChange={(e) => setLname(e.target.value)}
           />
           <input
