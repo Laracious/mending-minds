@@ -209,6 +209,15 @@ def approve_req():
     return jsonify({
         ""
     })
+#@auth.route("/list_councilors/", methods=["GET"])
+#@jwt_required
+#def concilors():
+ #   user_id = get_jwt_identity()
+  #  if user_id is None:
+   #     return ({
+    #        "error":"user Not logged in"
+     #   })
+    #counsilor = Counsilor.query.filter_by(first_name)
     
         
         
