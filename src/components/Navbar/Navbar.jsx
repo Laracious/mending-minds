@@ -13,16 +13,11 @@ function Navbar() {
   // ShowNavbar toggles the visibility of the navbar.c
   const showNavbar = () => {
     navRef.current.classList.toggle("responsive_nav");
-<<<<<<< HEAD
   };
    const handleClick = () => {
      showNavbar(false);
    };
 
-=======
-  }
-  let navigation = useNavigate()
->>>>>>> 440769d8f6e59e63a8c90cb3cb11f2780c885ae7
   const handleLogOut = () => {
     localStorage.removeItem("token");
     
@@ -105,19 +100,7 @@ function Navbar() {
           </button>
         </>
         )}
-<<<<<<< HEAD
-        {auth && <span className="greeting1">Hi, {name}</span>}
-        <button className="nav-btn nav-close-btn" onClick={showNavbar}>
-          <FaTimes />
-        </button>
       </nav>
-      {auth && <span className="greeting1">Hi, {name}</span>}
-      <button className="nav-btn" onClick={showNavbar}>
-        <FaBars />
-      </button>
-=======
-      </nav>
->>>>>>> 440769d8f6e59e63a8c90cb3cb11f2780c885ae7
     </header>
   );
 }

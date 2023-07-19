@@ -1,6 +1,6 @@
 #This the authentication bluebrint of our app
-from flask import Blueprint, request, jsonify
-from web.models import User, db, Appointment, Userstory
+from flask import Blueprint, request, jsonify, redirect, url_for
+from web.models import User, db, Appointment, Userstory, Counsilor
 
 #jwt sessions libs
 from flask_jwt_extended import (
@@ -16,7 +16,27 @@ auth = Blueprint('auth', __name__)
 @auth.route('/login', methods=['POST'])
 def Login():
     email = request.json.get('email')
-    password = request.json.get('password')
+    password = request.json.get('password') 
+    
+
+    domain = "@mending_minds"
+    if email.find(domain) != -1:
+        counsilor = Counsilor.query.filter_by(email=email).first()
+        #create the tokens we will be sending back to the concilor
+        access_token = create_access_token(identity=counsilor.id)
+        if counsilor is None:
+            return jsonify({
+                "error":"counsilor does nor exist"
+            }), 401 
+        if not check_password_hash(counsilor.password, password):
+            return jsonify({
+                "error":"Incorrect password"
+        }), 409
+        resp=jsonify({
+            'access_token': access_token
+            })
+        return resp, 200
+        
 
     if len(email) < 1:
         return jsonify(
@@ -33,6 +53,8 @@ def Login():
     #query db for credentials
     
     user = User.query.filter_by(email=email).first()
+    #create the tokens we will be sending back to the user
+    access_token = create_access_token(identity=user.id)
     
     if user is None:
         return jsonify ({
@@ -43,8 +65,7 @@ def Login():
         return jsonify({
             "error":"Incorrect password"
         }), 409
-    #create the tokens we will be sending back to the user
-    access_token = create_access_token(identity=user.id)
+   
     resp=jsonify({
         'access_token': access_token
     })
@@ -54,13 +75,29 @@ def Login():
 @auth.route('/Sign', methods=['GET', 'POST'])
 def SignUP():
     email =request.json['email']
-    firstName = request.json['fname']
-    lastName = request.json['lname']
+    firstName = request.json['first_name']
+    lastName = request.json['last_name']
     password = request.json['password']
     cpassword = request.json['cpassword']
-    
+    #hash pasword
+    hashed_ps = generate_password_hash(password)
     user_exists = User.query.filter_by(email=email).first() is not None
-
+    if email == firstName+"@mending_minds.com":
+        counsilor  = Counsilor.query.filter_by(email=email).first() is not None
+        if counsilor:
+            return jsonify({
+                "error":"counsilor already exits"
+            }), 409
+        
+        new_councilor = Counsilor(email=email, password=hashed_ps,first_name=firstName, last_name=lastName)
+        db.session.add(new_councilor)
+        db.session.commit()
+        return jsonify({
+            "c_email":new_councilor.email,
+            "c_id":new_councilor.id,
+            "first_name":new_councilor.first_name,
+            "last_name":new_councilor.last_name
+        })
     if user_exists:
         return jsonify({
             "error":"User already exists"
@@ -70,7 +107,7 @@ def SignUP():
         return jsonify({
             "error":'Passwords do not match'
         }), 401
-    hashed_ps = generate_password_hash(password)
+    
     new_user = User(email=email, password=hashed_ps, first_name=firstName, last_name=lastName)
     db.session.add(new_user)
     db.session.commit()
@@ -128,9 +165,15 @@ def get_current_user():
             'error':'User not logged in'
         }), 401
     user = User.query.filter_by(id=current_user_id).first()
-    return jsonify({
-        'first_name':user.first_name
-    })
+    counsilor = Counsilor.query.filter_by(id=current_user_id).first()
+    if user:
+        return jsonify({
+            'first_name':user.first_name
+            })
+    else:
+        return jsonify({
+            'first_name':counsilor.first_name
+        })
 
 auth.route("/Counsilor", methods=['GET'])
 @jwt_required
