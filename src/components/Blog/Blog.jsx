@@ -89,11 +89,13 @@ const Blog = () => {
             </div>
           </div>
         </div>
-        
       </div>
       <footer>
-          <p>&copy; 2023 Mending Mind. All rights reserved.</p>
-        </footer>
+        <p>
+          &copy; <span class="data"> {new Date().getFullYear()}</span> Mending
+          Mind. All rights reserved.
+        </p>
+      </footer>
     </div>
   );
 };

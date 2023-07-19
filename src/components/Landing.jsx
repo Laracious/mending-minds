@@ -66,7 +66,10 @@ const Landing = () => {
         </div>
       </main>
       <footer>
-        <p>&copy; 2023 Mending Mind. All rights reserved.</p>
+        <p>
+          &copy; <span class="data"> {new Date().getFullYear()}</span> Mending
+          Mind. All rights reserved.
+        </p>
       </footer>
     </div>
   );
