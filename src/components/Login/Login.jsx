@@ -53,12 +53,12 @@ const Login = ({ handleLogin }) => {
             } else alert("there was an error");
           })
           .then(data => {
-            location.reload(false);
             localStorage.setItem("loggedin_user", data.first_name);
             console.log("user"+ data.first_name);
+            location.reload(false);
           })
           .catch(function (err) {
-            console.log("there was an eror", err);
+            console.log(err);
           })
         })
         .catch(function (error) {
