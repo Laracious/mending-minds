@@ -8,6 +8,11 @@ from uuid import uuid4
 def get_uuid():
     return uuid4().hex
 
+def nowDate():
+    now = datetime.now()
+    now.strftime("%d/%m/%Y %H:%M:%S")
+    return now
+
 class User(db.Model, UserMixin):
     id = db.Column(db.String(32), primary_key=True, unique=True, default=get_uuid)
     email = db.Column(db.String(345), nullable=False,unique=True)
@@ -25,8 +30,8 @@ class Userstory(db.Model):
 
 class Appointment(db.Model):
     id = db.Column(db.String(32), primary_key=True, unique=True, default=get_uuid)
-    created_at = db.Column(db.DateTime, nullable=False, default=func.now())
-    scheduled_time = db.Column(db.DateTime, nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False, defualt=nowDate())
+    scheduled_date = db.Column(db.DateTime, nullable=False)
     issue = db.Column(db.String(150), nullable=False)
     status = db.Column(db.Boolean, nullable=False,default=False)
     user_id = db.Column(db.String(32), db.ForeignKey('user.id'))
