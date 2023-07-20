@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;700&display=swap");
 
+
 *{
   margin: 0;
   padding: 0;
@@ -351,11 +352,6 @@ body{
   display: block;
 }
 
-.date-Picker {
-  /* background-color: red;
-  width: 100%; */
-}
-
 @media only screen and (max-width: 1250px){
   .container{
     display: flex;
@@ -435,7 +431,7 @@ input, textarea, select{
   width: 100%;
   padding: 10px;
   outline: 0;
-  border: 1px solid #fff;
+  border: 1px solid green;
   background: rgb(85, 239, 85);
   font-size: 15px;
 }
@@ -457,6 +453,16 @@ button{
   border: 1px solid #fff;
   width: 100%;
   cursor: pointer;
+}
+
+.cancel-btn {
+  background-color: rgb(192, 6, 6) !important;
+  font-family: 'poppins', sans-serif;
+}
+
+.submit-btn {
+  background-color: #186105 !important;
+  font-family: 'poppins', sans-serif;
 }
 input:focus~label, input:valid~label
 textarea:focus~label, textarea:valid~label{

@@ -57,7 +57,7 @@
 	color: red !important;
 	font-weight: bold;
 }
-input{
+input, select, textarea{
 	background-color: #fff !important;
 }
 
