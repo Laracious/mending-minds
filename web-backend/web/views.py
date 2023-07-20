@@ -70,3 +70,4 @@ def registered_councilors():
                 "first_name":c.first_name
                 })
 
+
