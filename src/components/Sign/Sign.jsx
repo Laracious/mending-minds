@@ -114,7 +114,7 @@ const Sign = () => {
             placeholder="Password"
             value={password}
           />
-          //ERROR message
+          {/* ERROR message */}
           {error.password && (
             <p className="error-message">
               Password should be at least 6 characters
@@ -126,7 +126,7 @@ const Sign = () => {
             placeholder="Confirm password"
             value={cpassword}
           />
-          // ERROR message
+          {/* ERROR message */}
           {error.cpassword && (
             <p className="error-message">Passwords do not match</p>
           )}

@@ -10,13 +10,13 @@ import "react-datepicker/dist/react-datepicker.css";
 
 
 const Booking = () => {
-  let scheduledData = [
-    {
-      date: "02/07/2023-08:00am",
-      counsellor: "Lorito",
-      status: "Approved",
-    },
-  ];
+  // let scheduledData = [
+  //   {
+  //     date: "02/07/2023-08:00am",
+  //     counsellor: "Lorito",
+  //     status: "Approved",
+  //   },
+  // ];
   // const scheduledData = localStorage.getItem("Booking")
   //   ? [localStorage.getItem("Booking")]
   //   : [
@@ -28,7 +28,13 @@ const Booking = () => {
   //     ];
 
   const [bookingForm, setBookingForm] = useState(false);
-  const [scheduleData, setScheduleData] = useState(scheduledData);
+  const [scheduleData, setScheduleData] = useState([
+    {
+      date: "02/07/2023-08:00am",
+      counsellor: "Lorito",
+      status: "Approved",
+    },
+  ]);
   const [selected, setSelected] = useState();
   const [selectedDate, setSelectedDate] = useState(null);
   const [formData, setFormData] = useState({
@@ -120,30 +126,19 @@ const Booking = () => {
 
   function handleBooking(e) {
     e.preventDefault();
-    // scheduleData.push({
-    //   // date: selectedDate,
-    //   // reason: formData.reason,
-    //   counsellor: formData.counsellor,
-    //   status: "",
-    // });
-
     const data = {
-      // date: selectedDate,
+      date: selectedDate,
       // reason: formData.reason,
       counsellor: formData.counsellor,
       status: "Pending",
     };
     setBookingForm(false);
-    //  scheduleData.push(data)
 
-    // if(localStorage.getItem("Booking")) {
-
-    // }
-    scheduledData.push(data);
-    console.log(scheduleData);
-    console.log(formData.counsellor);
+    let newData = [...scheduleData, data]
+    setScheduleData(newData);
+    // console.log(scheduleData);
+    // console.log(formData.counsellor);
   }
-  console.log(Array.isArray(scheduleData));
 
   function handleDate(e) {
     console.log();
@@ -160,7 +155,7 @@ const Booking = () => {
             <form onChange={handlleChange} onSubmit={handleBooking}>
               <span>Make appointment</span>
               <div className="date-Picker ">
-                {/* <input
+                <input
                 id="datee"
                   type="datetime-local"
                   name="date"
@@ -168,15 +163,15 @@ const Booking = () => {
                   placeholder="Select DateTime"
                   onChange={handleDate}
                   
-                /> */}
-                <DatePicker
+                />
+                {/* <DatePicker
                   name="date"
                   // className="date-Picker"
                   selected={selectedDate}
                   onChange={(date) => setSelectedDate(date)}
                   dateFormat="dd-MM-yyyy"
                   // value={selectedDate}
-                />
+                /> */}
               </div>
               <div className="input-group">
                 <textarea
