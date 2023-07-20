@@ -4,14 +4,14 @@ import { useNavigate } from "react-router";
 
 const tokens = localStorage.getItem("token");
 
-
-const Login = ({ handleLogin }) => {
+const Login = () => {
+  // login state
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   let navigation = useNavigate();
  
-  // console.log(email);
+
 
   function handleLogin() {
       const opts = {
@@ -93,7 +93,7 @@ const Login = ({ handleLogin }) => {
             Login
           </button>
           <p className="alternative">
-            Don't an account? <a href="./sign">Sign up</a>{" "}
+            Don't have an account? <a href="./sign">Sign up</a>{" "}
             </p>
         </form>
       </div>

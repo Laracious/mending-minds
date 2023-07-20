@@ -18,7 +18,8 @@
   height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  padding-top: 8rem;
+  /* align-items: center; */
   background-image: url(https://cdn.pixabay.com/photo/2016/10/14/08/24/consulting-1739639_1280.jpg);
   background-size: cover;
 	background-repeat: no-repeat;
@@ -33,11 +34,11 @@
   width: 40vh;
   height: 40vh;
   max-width: 80%;
-  margin: auto;
+  /* margin: auto; */
   padding: 20px;
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
   border-radius: 4px;
-  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1); */
   
   
 }
@@ -78,3 +79,15 @@ form button {
 form button:hover {
   background-color: var(--mainColorLight);
 }
+
+@media only screen and (max-width: 1024px) {
+  .login-page{
+    padding-top: 8rem;
+  }    
+  .login-container {
+    width: 80vw;
+  }
+
+}
+
+

@@ -6,41 +6,16 @@ import "react-datepicker/dist/react-datepicker.css";
 // import './Session'
 //import { Session } from "./Session";
 
-
-
-
 const Booking = () => {
-  let scheduledData = [
-    {
-      date: "02/07/2023-08:00am",
-      counsellor: "Lorito",
-      status: "Approved",
-    },
-  ];
-  // const scheduledData = localStorage.getItem("Booking")
-  //   ? [localStorage.getItem("Booking")]
-  //   : [
-  //       {
-  //         // date: "02/07/2023-08:00am",
-  //         counsellor: "Lorito",
-  //         status: "Approved",
-  //       },
-  //     ];
-
   const [bookingForm, setBookingForm] = useState(false);
-  const [scheduleData, setScheduleData] = useState(scheduledData);
+  const [scheduleData, setScheduleData] = useState([]);
   const [selected, setSelected] = useState();
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [booking, setBooking] = useState(false);
   const [formData, setFormData] = useState({
     date: "",
     reason: "",
     counsellor: "",
   });
-
-  // console.log( scheduleData.map(e => e));
-
-  // console.log(formData);
-  // console.log(selectedDate);
 
   function handleSelected(e) {}
 
@@ -69,10 +44,10 @@ const Booking = () => {
   // function closePopup() {
   //   popup.classList.remove("open-popup");
   // }
+
+  // handle chnage for form value
   function handlleChange(e) {
     const { name, value } = e.target;
-
-    // console.log(e.target.name);
     setFormData((prev) => ({ ...prev, [name]: value }));
   }
 
@@ -81,72 +56,79 @@ const Booking = () => {
 
   //LOGIC TO DISPLAY THE LIST OF AVAILABLE COUNSELLORS
   const selectedCounsellor = counsellors.map((elem, i) => (
-    // <select id="therapist" required>
     <option key={i} name={elem} value={elem}>
       {elem}
     </option>
-    // </select>
   ));
 
-  const selectOptions = (
-    <select id="therapist" required>
-      {selectedCounsellor}
-    </select>
-  );
-
-  // let scheduleData = [
-  //   {
-  //     // date: "02/07/2023-08:00am",
-  //     counsellor: "Lorito",
-  //     status: "Approved",
-  //   },
-  // ];
-
+  // LOGIC TO MAP THE FORM DATA TO THE BOOKING TABLE
   const schedule = scheduleData.map((data, i) => (
     <tr key={i}>
-      <td data-cell="Date">{data.date}e</td>
+      <td data-cell="Date">{data.date}</td>
       <td data-cell="counsellor">{data.counsellor}</td>
       <td data-cell="status">{data.status}</td>
     </tr>
   ));
 
+  // CANCEL BUTTON FUNCTION
   function closePopup() {
     setBookingForm(false);
   }
 
+  // BOOK AN APPOINT BUTTON
   function showBooking() {
     setBookingForm(true);
   }
 
+  //BOOKING FUNCTION
   function handleBooking(e) {
     e.preventDefault();
-    // scheduleData.push({
-    //   // date: selectedDate,
-    //   // reason: formData.reason,
-    //   counsellor: formData.counsellor,
-    //   status: "",
-    // });
 
+    //STORING THE SELECTED DATE AS A NEW DATE INSTANCE
+    const formattedDate = new Date(formData.date);
+
+    //CHANGING DEFAULT THE DATE FORMAT
+    const bookingDate = formattedDate.toLocaleDateString("en-GB", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    });
+
+    //CHANGING THE DEFAULT TIME FORMAT
+    const bookingTime = formattedDate.toLocaleTimeString("en-US", {
+      hour12: false,
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
+    //STORING THE FORM DATA (WITH THE UPDATED TIME FORMAT)
     const data = {
-      // date: selectedDate,
-      // reason: formData.reason,
+      date:
+        (date === "" ? "" : bookingDate) +
+        " " +
+        (date === "" ? "" : bookingTime),
       counsellor: formData.counsellor,
-      status: "Pending",
+      status: date === "" && counsellor === "" ? "" : "Approved",
     };
-    setBookingForm(false);
-    //  scheduleData.push(data)
 
-    // if(localStorage.getItem("Booking")) {
+    //STORING THE CURRENT SCHEDULE DATA AND THE NEW FORM DATA IN AN ARRAY
+    const newData =
+      data === { date: "", counsellor: "", status: "" }
+        ? [scheduleData]
+        : [...scheduleData, data];
 
-    // }
-    scheduledData.push(data);
-    console.log(scheduleData);
-    console.log(formData.counsellor);
-  }
-  console.log(Array.isArray(scheduleData));
+    if (date === "" && counsellor === "") {
+      alert("Can't submit an empty form.");
+    } else {
+      //SETTING THE SCHEDULE DATA TO THE NEW ARRAY
+      setScheduleData(newData);
 
-  function handleDate(e) {
-    console.log();
+      //DISMISSING THE BOOKING FORM
+      setBookingForm(false);
+
+      //SETTING THE BOOKING STATE FOR TABLE DISPLAY
+      setBooking(true);
+    }
   }
 
   return (
@@ -160,22 +142,12 @@ const Booking = () => {
             <form onChange={handlleChange} onSubmit={handleBooking}>
               <span>Make appointment</span>
               <div className="date-Picker ">
-                {/* <input
-                id="datee"
+                <input
+                  id="datee"
                   type="datetime-local"
                   name="date"
                   required
                   placeholder="Select DateTime"
-                  onChange={handleDate}
-                  
-                /> */}
-                <DatePicker
-                  name="date"
-                  // className="date-Picker"
-                  selected={selectedDate}
-                  onChange={(date) => setSelectedDate(date)}
-                  dateFormat="dd-MM-yyyy"
-                  // value={selectedDate}
                 />
               </div>
               <div className="input-group">
@@ -197,27 +169,25 @@ const Booking = () => {
                   value={selected}
                   required
                 >
-                  {/* <option value="therapist"> Select Counsellor</option> */}
-                  {selectedCounsellor}
-                  {/* <option name="Lorito" value={counsellor}>
-                    Lorito
-                  </option>
-                  <option name="Lara" value={counsellor}>
-                    Lorito
-                  </option>
-                  <option name="Benon" value={counsellor}>
-                    Lorito
-                  </option>
-                  <option name="David" value={counsellor}>
-                    Lorito
-                  </option> */}
+                  <option value=""> Select Counsellor</option>
+                  {/* LIST OF COUNSELLORS */}
+                  {selectedCounsellor} 
+                 
                 </select>
               </div>
               <div className="popup-form-btnContainer">
-                <button type="submit" onClick={closePopup}>
+                <button
+                  className="cancel-btn"
+                  type="submit"
+                  onClick={closePopup}
+                >
                   CANCEL
                 </button>
-                <button type="submit" onClick={handleBooking}>
+                <button
+                  className="submit-btn"
+                  type="submit"
+                  onClick={handleBooking}
+                >
                   SUBMIT
                 </button>
               </div>
@@ -225,32 +195,29 @@ const Booking = () => {
           </div>
         )}
       </div>
-      <div className="right-sidebar1">
-        <div className="wrapper">
-          <div className="table-container">
-            <table>
-              <caption>Scheduled Sessions</caption>
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>counsellor</th>
-                  {/* <th>none</th> */}
-                  <th>status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {/* <tr>
-                <td data-cell="Date">02/07/2023-08:00am</td>
-                <td data-cell="counsellor">Lorito</td>
-                <td data-cell="none">none</td>
-                <td data-cell="status">approved</td>
-              </tr> */}
-                {schedule}
-              </tbody>
-            </table>
+      {booking && (
+        <div className="right-sidebar1">
+          <div className="wrapper">
+            <div className="table-container">
+              <table>
+                <caption>Booking details</caption>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>counsellor</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                
+              {/* BOOKING DETAILS */}
+                  {schedule}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
-      </div>
+      )}
       <script>
         {/* let popup = document.querySelector(".popup-form")
         function openPopup(){

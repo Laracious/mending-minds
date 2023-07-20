@@ -120,7 +120,6 @@ function Navbar() {
       
       {/* display greeting when authenticated */}
       { token &&
-      <span className="greeting1">Hi, {name}</span>}
 
       {/* Hambuger button to open navbar menu */}
       <button className="nav-btn" onClick={showNavbar}>
