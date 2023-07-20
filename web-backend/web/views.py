@@ -70,3 +70,38 @@ def registered_councilors():
                 "first_name":c.first_name
                 })
 
+@views.route("/appointment", methods=['GET','POST'])
+@jwt_required
+def make_appoitment():
+    current_user_id = get_jwt_identity()
+    if not current_user_id:
+        return jsonify({
+            'error': 'User not logged in'
+        }), 401
+    
+    sheduled_date = request.json['sheduled_date']
+    created_at = request.json['created_at']
+    appoitments = Appointment.query.filter_by(sheduled_date=sheduled_date)
+
+    if appoitments is None:
+        return jsonify({
+            "error": "User has no appointments"
+            }), 401
+    if request.method == "GET":
+        # check for approved appointments
+        if appoitments.status == True:
+            return jsonify({
+                "sheduled_date": appoitments.sheduled_time,
+                "issue": appoitments.issue,
+                "status":appoitments.status
+                })
+        
+    new_appoitment = Appointment(sheduled_date=sheduled_date,created_at=created_at)
+    db.session.add(new_appoitment)
+    db.session.commit()
+    return jsonify({
+        "id": new_appoitment.id,
+        "created_at":new_appoitment.created_at,
+        "scheduled_time":new_appoitment.scheduled_time,
+        "user_id":new_appoitment.user_id
+    })
