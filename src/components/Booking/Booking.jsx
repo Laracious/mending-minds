@@ -9,7 +9,6 @@ import "react-datepicker/dist/react-datepicker.css";
 
 
 
-
 const Booking = () => {
   let scheduledData = [
     {
