@@ -37,7 +37,7 @@ header h1{
 }
 nav a {
 	/* margin: 0 1rem; */
-	font-size: 1rem;
+	font-size: 1.2rem;
 	color: #000;
 	text-decoration: none;
 }
@@ -69,8 +69,8 @@ header .nav-btn {
 }
 
 nav button{
-	width: 9rem;
-	height: 3rem;
+	width: 6rem;
+	height: 2rem;
 	font-size: 1.5rem;
 	border-radius: 10px;
 	border: 0;
@@ -162,7 +162,8 @@ nav {
 	}
 
 	nav a {
-		font-size: 1rem;
+		font-size: 1.3rem;
+		/* font-weight: bold; */
 	}
 	
 	nav a:hover {
@@ -178,12 +179,12 @@ nav {
 	}
 
 	nav button .active {
-		color: #aaf5ac;
+		color: #139518;
 	}
 	.greeting{
 		display: block;
 		font-size: 1.2rem;
-	color: #fff;
+		color: #fff;
 		
 	}
 	
