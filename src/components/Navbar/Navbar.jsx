@@ -110,14 +110,14 @@ function Navbar() {
             </button>
           </>
         )}
-        <span className="greeting">Hi, {name}</span>
+        {/* <span className="greeting">Hi, {name}</span> */}
         {/* button to close navbar on mobile */}
         <button className="nav-btn nav-close-btn" onClick={showNavbar}>
           <FaTimes />
         </button>
       </nav>
       {/* display greeting when authenticated */}
-      <span className="greeting1">Hi, {name}</span>
+      {/* <span className="greeting1">Hi, {name}</span> */}
 
       {/* Hambuger button to open navbar menu */}
       <button className="nav-btn" onClick={showNavbar}>

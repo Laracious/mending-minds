@@ -82,12 +82,6 @@ nav button{
 	align-items: center;
 }
 
-/* .sign-up {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-} */
-
 .sign-up a:hover {
 	color: #fff;
 }
@@ -100,8 +94,6 @@ nav button{
 	color: #fff;
 }
 
-
-
 nav button:hover {
 	color: #0a810c;
 }
@@ -111,9 +103,7 @@ nav {
 	display: flex;
 	align-items: center;
 }
-/* .login{
-	padding-left: rem;
-} */
+
 .greeting{
 	display: none;
 }
@@ -124,11 +114,11 @@ nav {
 	color: #0a810c;
 	background-color: #fff;
 }
+
 @media only screen and (max-width: 1024px) {
 	header .nav-btn {
-		/* visibility: visible; */
+
 		display: block;
-		/* opacity: 1; */
 		width: auto;
 	}
 	header {
@@ -156,8 +146,8 @@ nav {
 		background-color: var(--mainColor);
 		transition: 1s;
 	}
-	h1{
-		font-size: 1.5rem;
+	.logo h1{
+		font-size: 2rem;
 	}
 
 	header .responsive_nav {
@@ -194,11 +184,18 @@ nav {
 		display: block;
 		font-size: 1.2rem;
 	color: #fff;
-		/* float: right; */
+		
 	}
 	
 	.greeting1{
 		display: none;
+	}
+
+}
+
+@media only screen and (max-width: 370px) {
+  .logo h1{
+		font-size: 1.5rem;
 	}
 
 }

@@ -1,106 +1,135 @@
-// import React from 'react'
-import { useState} from "react";
+
+import { useState } from "react";
 import "./sign.css";
 import { useNavigate } from "react-router";
-import axios from 'axios';
-// const [password, setPassword] = useState('');
+import axios from "axios";
+
 
 const Sign = () => {
-  const [email, setEmail] = useState('');
-  const [first_name, setFname] = useState('');
-  const [last_name, setLname] = useState('');
-  const [password,setPassword] = useState('');
-  const [cpassword, setCpassword] = useState('');
- 
- 
+  //ERROR STATE
+  const [error, setError] = useState({
+    email: false,
+    password: false,
+    cpassword: false,
+  });
 
+  //FORM DATA STATE
+  const [formData, setFormData] = useState({
+    fname: "",
+    lname: "",
+    email: "",
+    password: "",
+    cpassword: "",
+  });
+  const { lname, fname, email, password, cpassword } = formData;
+// ONCHANGE FUNCTION FOR FORM VALIDATION
+  function formValidation(e) {
+    const { name, value } = e.target;
+    //REGULAR EXPRESSION FOR EMAIL VALIDATION
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/i;
+    if (name === "email") {
+      if (value !== "" && !regex.test(value)) {
+        setError((prev) => ({ ...prev, email: true }));
+      } else {
+        setError((prev) => ({ ...prev, email: false }));
+      }
+    }
+    //REGULAR EXPRESSION FOR PASSWORD VALIDATION
+    const passwordRegex = /[a-zA-Z]{6,}/;
 
-  // console.log(formData);
-  // console.log(formData);
+    if (name === "password") {
+      if (value !== "" && !passwordRegex.test(value)) {
+        setError((prev) => ({ ...prev, password: true }));
+      } else {
+        setError((prev) => ({ ...prev, password: false }));
+      }
+    }
+    if (name === "cpassword" && value !== password) {
+      setError((prev) => ({ ...prev, cpassword: true }));
+    } else {
+      setError((prev) => ({ ...prev, cpassword: false }));
+    }
+    // SET FORM VALUES
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  }
 
   let navigation = useNavigate();
 
-  function isValidEmail(email) {
-    // A simple email validation using a regular expression
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  }
-
   
 
-  function handleSignUp (){
-    if (!isValidEmail(email)) {
-      setError('Please enter a valid email address.');
-      return;
-    }
+  function handleSignUp() {
     const opts = {
-      method:"POST",
-      headers:{
-        'Content-Type': 'application/json'
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email:email,
-        password:password,
-        cpassword:cpassword,
-        last_name:last_name,
-        first_name:first_name,
+        email: email,
+        password: password,
+        cpassword: cpassword,
+        last_name: lname,
+        first_name: fname,
+      }),
+    };
+    fetch("http://127.0.0.1:5000/Sign", opts)
+      .then(function (response) {
+        console.log(response);
+        navigation("/Login");
+      })
+      .catch(function (error) {
+        console.log(error.data);
+      });
+  }
 
-      })}
-    fetch('http://127.0.0.1:5000/Sign', opts
-    )
-    .then(function (response) {
-      console.log(response);
-      navigation("/Login");
-    })
-    .catch(function (error) {
-      console.log(error.data);
-
-    });
-  };
-
-
-
+// FORM DATA
   return (
     <div className="signUp-container">
       <div className="signUp">
         <h2>Sign Up</h2>
-        <form method="POST">
+        <form method="POST" onChange={formValidation}>
           <input
             type="text"
             name="fname"
             placeholder="First name"
-            value={first_name}
-            onChange={(e) => setFname(e.target.value)}
+            value={fname}
           />
           <input
             type="text"
             name="lname"
             placeholder="Last name"
-            value={last_name}
-            onChange={(e) => setLname(e.target.value)}
+            value={lname}
           />
           <input
             type="email"
             name="email"
             placeholder="Enter your email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
           />
+          {error.email && (
+            <p className="error-message">Please enter a valid email</p>
+          )}
           <input
             type="password"
             name="password"
-            // pattern="\b[a-zA-Z0-9._%@-]{6,}\b"
             placeholder="Password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
           />
+          //ERROR message
+          {error.password && (
+            <p className="error-message">
+              Password should be at least 6 characters
+            </p>
+          )}
           <input
             type="password"
             name="cpassword"
             placeholder="Confirm password"
             value={cpassword}
-            onChange={(e) => setCpassword(e.target.value)}
           />
+          // ERROR message
+          {error.cpassword && (
+            <p className="error-message">Passwords do not match</p>
+          )}
           <button type="button" onClick={handleSignUp}>
             Sign Up
           </button>

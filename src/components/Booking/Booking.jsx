@@ -230,7 +230,7 @@ const Booking = () => {
         <div className="wrapper">
           <div className="table-container">
             <table>
-              <caption>Scheduled Sessions</caption>
+              <caption>Booking details</caption>
               <thead>
                 <tr>
                   <th>Date</th>

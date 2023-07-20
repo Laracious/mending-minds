@@ -21,7 +21,6 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	/* background-color: #83BD75; */
 	background-image: url(https://cdn.pixabay.com/photo/2021/02/09/09/55/searching-5998018_1280.jpg);
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -35,23 +34,15 @@
 }
 
 .signUp {
-	/* width: 80%;
-  height: 63%;
-	min-width: 40%;
-	min-height: 40%; */
 	width: 40vh;
   height: 50vh;
-	/* min-height: 40%; */
-  /* max-width: 80%; */
-  margin: auto;
-  padding: 5px;
-	border: 1px solid #5c5151;
+	/* border: 1px solid #5c5151; */
 	border-radius: 4px;
-	box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
+	/* box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1); */
 }
 .signUp h2{
 	font-size: 3rem;
-	color: #057629;
+	color: #e2f1e7;
 }
 .alternative{
 	padding-top: 10px;
@@ -62,3 +53,11 @@
 .alternative a{
 	color: #186105;
 }
+.error-message{
+	color: red !important;
+	font-weight: bold;
+}
+input{
+	background-color: #fff !important;
+}
+
