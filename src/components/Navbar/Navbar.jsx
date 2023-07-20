@@ -36,9 +36,9 @@ function Navbar() {
 
     return firstLetter + restOfLetters;
   }
-  // function capitalizeFirstLetter(string) {
-  // return string.charAt(0).toUpperCase() + string.slice(1);
-  // }
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1)
+  }
   name = capitalizeFirstLetter(name);
 
   return (
@@ -110,14 +110,17 @@ function Navbar() {
             </button>
           </>
         )}
-        <span className="greeting">Hi, {name}</span>
+        { token && 
+        <span className="greeting">Hi, {name}</span>}
         {/* button to close navbar on mobile */}
         <button className="nav-btn nav-close-btn" onClick={showNavbar}>
           <FaTimes />
         </button>
       </nav>
+      
       {/* display greeting when authenticated */}
-      <span className="greeting1">Hi, {name}</span>
+      { token &&
+      <span className="greeting1">Hi, {name}</span>}
 
       {/* Hambuger button to open navbar menu */}
       <button className="nav-btn" onClick={showNavbar}>

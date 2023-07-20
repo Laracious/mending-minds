@@ -49,9 +49,9 @@ const Login = ({ handleLogin }) => {
               return response.json()
             } else alert("there was an error");
           })
-          .then(data => {
-            localStorage.setItem("loggedin_user", data.first_name);
-            console.log("user"+ data.first_name);
+          .then(names => {
+            localStorage.setItem("loggedin_user", names.first_name);
+            console.log("user"+ names.first_name);
             location.reload(false);
           })
           .catch(function (err) {

@@ -30,10 +30,10 @@ class Userstory(db.Model):
 
 class Appointment(db.Model):
     id = db.Column(db.String(32), primary_key=True, unique=True, default=get_uuid)
-    created_at = db.Column(db.DateTime, nullable=False, defualt=nowDate())
+    created_at = db.Column(db.DateTime, nullable=False)
     scheduled_date = db.Column(db.DateTime, nullable=False)
     issue = db.Column(db.String(150), nullable=False)
-    status = db.Column(db.Boolean, nullable=False,default=False)
+    status = db.Column(db.Boolean, nullable=False, default=False)
     user_id = db.Column(db.String(32), db.ForeignKey('user.id'))
     co_id =db.Column(db.String(32), db.ForeignKey('counsilor.id'))
 
