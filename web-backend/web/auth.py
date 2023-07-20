@@ -1,12 +1,11 @@
 #This the authentication bluebrint of our app
 from flask import Blueprint, request, jsonify, redirect, url_for
-from web.models import User, db, Appointment, Userstory, Counsilor
+from web.models import User, db, Appointment,Counsilor
 
 #jwt sessions libs
 from flask_jwt_extended import (
     create_access_token,get_jwt_identity,jwt_required,
 ) 
-
 
 #secure password
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -18,7 +17,6 @@ def Login():
     email = request.json.get('email')
     password = request.json.get('password') 
     
-
     domain = "@mending_minds"
     if email.find(domain) != -1:
         counsilor = Counsilor.query.filter_by(email=email).first()
@@ -48,7 +46,6 @@ def Login():
         return jsonify({
             "error":"passsword Required"}
             )
-    
     
     #query db for credentials
     
@@ -194,6 +191,7 @@ def show_app_req():
                 "sheduled_time":app_req.scheduled_time,
                 "status":app_req.status
             })
+
 auth.route("/Counsilor/approve",methods=['POST'])
 @jwt_required
 def approve_req():
@@ -209,11 +207,8 @@ def approve_req():
     return jsonify({
         ""
     })
-    
+
+
         
-        
-
     
-
-
     

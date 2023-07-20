@@ -12,6 +12,7 @@ const Sign = () => {
   const [password,setPassword] = useState('');
   const [cpassword, setCpassword] = useState('');
  
+ 
 
 
   // console.log(formData);
@@ -19,9 +20,20 @@ const Sign = () => {
 
   let navigation = useNavigate();
 
+  function isValidEmail(email) {
+    // A simple email validation using a regular expression
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+
+  
+
   function handleSignUp (){
+    if (!isValidEmail(email)) {
+      setError('Please enter a valid email address.');
+      return;
+    }
     const opts = {
-      
       method:"POST",
       headers:{
         'Content-Type': 'application/json'
@@ -45,6 +57,9 @@ const Sign = () => {
 
     });
   };
+
+
+
   return (
     <div className="signUp-container">
       <div className="signUp">
@@ -71,7 +86,6 @@ const Sign = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-
           <input
             type="password"
             name="password"

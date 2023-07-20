@@ -2,37 +2,51 @@ import { useRef } from "react";
 import { FaBars, FaTimes } from "react-icons/fa"; // imported icons from react-icons
 import "./navbar.css";
 import { NavLink } from "react-router-dom"; // import the 'NavLink' component from the React Router library.
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 
 function Navbar() {
   const navRef = useRef();
   const token = localStorage.getItem("token") ? true : false;
-  console.log(token);
+  // console.log(token);
 
-  // ShowNavbar toggles the visibility of the navbar.c
+  // ShowNavbar toggles the visibility of the navbar
   const showNavbar = () => {
     navRef.current.classList.toggle("responsive_nav");
   };
-   const handleClick = () => {
-     showNavbar(false);
-   };
+  const handleClick = () => {
+    showNavbar(false);
+  };
 
   const handleLogOut = () => {
     localStorage.removeItem("token");
-    
+
     navigation("/Login");
-  }
-//logout handled from backend
+  };
+  //logout handled from backend
   let name = localStorage.getItem("loggedin_user");
-  function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+
+  function capitalizeFirstLetter(str) {
+    if (typeof str !== "string" || str.length === 0) {
+      return str;
     }
-   name = capitalizeFirstLetter(name)
+
+    const firstLetter = str[0].toUpperCase();
+    const restOfLetters = str.slice(1).toLowerCase();
+
+    return firstLetter + restOfLetters;
+  }
+  // function capitalizeFirstLetter(string) {
+  // return string.charAt(0).toUpperCase() + string.slice(1);
+  // }
+  name = capitalizeFirstLetter(name);
 
   return (
     <header>
+    <div className="logo">
+
       <h1>Mending Minds</h1>
+    </div>
       <nav ref={navRef}>
         <NavLink
           className={({ isActive }) => (isActive ? "active" : "")}
@@ -83,7 +97,7 @@ function Navbar() {
               to="/Booking"
               onClick={handleClick}
             >
-              Appointments
+              Bookings
             </NavLink>
             <button className="logout" onClick={handleLogOut}>
               <NavLink
@@ -94,13 +108,21 @@ function Navbar() {
                 Log out
               </NavLink>
             </button>
-          <span className="greeting1">Hi, {name}</span>
-            <button className="nav-btn" onClick={showNavbar}>
-            <FaBars />
-          </button>
-        </>
+          </>
         )}
+        <span className="greeting">Hi, {name}</span>
+        {/* button to close navbar on mobile */}
+        <button className="nav-btn nav-close-btn" onClick={showNavbar}>
+          <FaTimes />
+        </button>
       </nav>
+      {/* display greeting when authenticated */}
+      <span className="greeting1">Hi, {name}</span>
+
+      {/* Hambuger button to open navbar menu */}
+      <button className="nav-btn" onClick={showNavbar}>
+        <FaBars />
+      </button>
     </header>
   );
 }

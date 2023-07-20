@@ -1,6 +1,6 @@
 #This the vies bluebrint of our app
 from flask import Blueprint,request, jsonify
-from web.models import Appointment,db, Userstory,User
+from web.models import Appointment,db, Userstory,Counsilor
 
 views = Blueprint('views', __name__)
 from flask_jwt_extended import (
@@ -55,4 +55,18 @@ def make_stories():
         "data": new_story.data,
         "user_id":new_story.user_id
     })
+@views.route("/registered_councilors", methods=["GET"])
+@jwt_required
+def registered_councilors():
+    user_id = get_jwt_identity()
+    if user_id is None:
+        return ({
+            "error":"User not logged in"
+        })
+    counsilor = Counsilor.query_all(Counsilor.id).limit(2)
+    if counsilor:
+        for c in counsilor:
+            return jsonify({
+                "first_name":c.first_name
+                })
 
